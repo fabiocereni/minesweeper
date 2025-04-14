@@ -4,8 +4,13 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
 
     private static GameModel myself;
 
+
+
+    private int counter;
+
     private GameModel() {
         super();
+        counter=0;
     }
 
     public static GameModel getInstance() {
@@ -28,7 +33,11 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
 
     @Override
     public void move() {
+        counter++;
         return;
+    }
+    public int getCounter() {
+        return counter;
     }
 
     // add all the relevant missing behaviours

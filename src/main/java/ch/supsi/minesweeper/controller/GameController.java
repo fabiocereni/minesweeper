@@ -54,6 +54,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     public void move() {
         this.gameModel.move();
         views.forEach(DataView::update);
+
     }
 
 }
