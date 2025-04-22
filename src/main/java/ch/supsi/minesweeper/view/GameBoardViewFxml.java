@@ -26,7 +26,6 @@ public class GameBoardViewFxml implements ControlledFxView {
 
     private GameModel gameModel;
 
-    private Button bottone = new Button();
     private Button[][] buttonMatrix = new Button[9][9];
 
     @FXML
