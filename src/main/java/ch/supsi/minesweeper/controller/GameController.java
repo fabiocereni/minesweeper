@@ -68,4 +68,11 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         views.forEach(DataView::update);
     }
 
+    @Override
+    public void selectCell(int row, int col) {
+        this.gameModel.selectCell(row, col);
+        views.forEach(DataView::update);
+    }
+
+
 }
