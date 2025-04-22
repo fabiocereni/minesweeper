@@ -6,13 +6,13 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
 
     private int counter;
 
-    private Grid field;
+    private Grid grid;
 
 
     private GameModel() {
         super();
         counter=0;
-        field = new Grid();
+        grid = new Grid();
     }
 
     public static GameModel getInstance() {
@@ -25,6 +25,7 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
 
     @Override
     public void newGame() {
+        grid.placeBombs();
 
     }
 
@@ -41,6 +42,15 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
     public int getCounter() {
         return counter;
     }
+
+    public boolean isaBomb(int x, int y){
+        return grid.getCell(x,y).isIsaBomb();
+    }
+
+    public int getNumberOfCell(int x, int y){
+        return grid.getCell(x,y).getNearBombs();
+    }
+
 
     // add all the relevant missing behaviours
     // ...

@@ -34,7 +34,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void newGame() {
         // do whatever you must do to start a new game
-
+        gameModel.newGame();
         // then update your views
         this.views.forEach(DataView::update);
     }

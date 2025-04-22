@@ -2,6 +2,7 @@ package ch.supsi.minesweeper.view;
 
 import ch.supsi.minesweeper.controller.EventHandler;
 import ch.supsi.minesweeper.model.AbstractModel;
+import ch.supsi.minesweeper.model.Cell;
 import ch.supsi.minesweeper.model.GameModel;
 import ch.supsi.minesweeper.model.PlayerEventHandler;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
@@ -96,6 +98,17 @@ public class GameBoardViewFxml implements ControlledFxView {
     @Override
     public void update() {
         // get your data from the model, if needed
+        for(int y = 0; y<9;y++){
+            for (int x = 0; x < 9; x++) {
+                if(gameModel.isaBomb(x,y)){
+                    buttonMatrix[x][y].setText("B");
+                    buttonMatrix[x][y].setStyle("-fx-background-color: red;");
+                }else{
+                    buttonMatrix[x][y].setText(""+gameModel.getNumberOfCell(x,y));
+                }
+            }
+        }
+
         // then update this view here
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         Date date = new Date(System.currentTimeMillis());
