@@ -25,8 +25,10 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
 
     @Override
     public void newGame() {
+        counter = 0;
+        grid.defaultGrid();
         grid.placeBombs();
-
+        notifyListeners();
     }
 
     @Override
@@ -37,6 +39,20 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
     @Override
     public void move() {
         counter++;
+    }
+
+    @Override
+    public void openCell(int row, int col) {
+
+    }
+
+    @Override
+    public void toggleFlag(int row, int col) {
+        grid.getCell(row, col).setFlag(true);
+    }
+
+    public boolean isFlagged(int row, int col) {
+        return grid.getCell(row, col).isFlag();
     }
 
     public int getCounter() {
@@ -54,5 +70,6 @@ public class GameModel extends AbstractModel implements GameEventHandler, Player
 
     // add all the relevant missing behaviours
     // ...
+
 
 }

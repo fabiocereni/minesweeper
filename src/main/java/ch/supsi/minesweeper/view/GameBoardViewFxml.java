@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
@@ -85,7 +86,14 @@ public class GameBoardViewFxml implements ControlledFxView {
         // add event handlers for all necessary buttons
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
-                buttonMatrix[y][x].setOnAction(event -> this.playerEventHandler.move());
+                //buttonMatrix[y][x].setOnAction(event -> this.playerEventHandler.move());
+                int fy = y;
+                int fx = x;
+                buttonMatrix[y][x].setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        this.playerEventHandler.toggleFlag(fy, fx);
+                    }
+                });
             }
         }
     }
@@ -103,7 +111,10 @@ public class GameBoardViewFxml implements ControlledFxView {
                 if(gameModel.isaBomb(x,y)){
                     buttonMatrix[x][y].setText("B");
                     buttonMatrix[x][y].setStyle("-fx-background-color: red;");
-                }else{
+                } else if (gameModel.isFlagged(x, y)) {
+                    buttonMatrix[x][y].setText("F");
+                    buttonMatrix[x][y].setStyle("-fx-background-color: green;");
+                } else {
                     buttonMatrix[x][y].setText(""+gameModel.getNumberOfCell(x,y));
                 }
             }
