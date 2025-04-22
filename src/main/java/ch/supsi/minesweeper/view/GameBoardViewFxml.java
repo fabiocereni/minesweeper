@@ -92,6 +92,8 @@ public class GameBoardViewFxml implements ControlledFxView {
                 buttonMatrix[y][x].setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.SECONDARY) {
                         this.playerEventHandler.toggleFlag(fy, fx);
+                    } else if (event.getButton() == MouseButton.PRIMARY) {
+                        this.playerEventHandler.selectCell(fy, fx);
                     }
                 });
             }
@@ -103,27 +105,39 @@ public class GameBoardViewFxml implements ControlledFxView {
         return this.containerPane;
     }
 
+
+
     @Override
     public void update() {
-        // get your data from the model, if needed
-        for(int y = 0; y<9;y++){
+        for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
-                if(gameModel.isaBomb(x,y)){
-                    buttonMatrix[x][y].setText("B");
-                    buttonMatrix[x][y].setStyle("-fx-background-color: red;");
-                } else if (gameModel.isFlagged(x, y)) {
-                    buttonMatrix[x][y].setText("F");
-                    buttonMatrix[x][y].setStyle("-fx-background-color: green;");
+                Cell cell = gameModel.getCell(x, y);
+                Button btn = buttonMatrix[x][y];
+
+                if (cell.isFlag()) {
+                    btn.setText("F");
+                    btn.setStyle("-fx-background-color: green;");
+                } else if (cell.isClicked()) {
+                    if (cell.isIsaBomb()) {
+                        btn.setText("B");
+                        btn.setStyle("-fx-background-color: yellow;");
+                    } else {
+                        int near = cell.getNearBombs();
+                        btn.setText(near > 0 ? String.valueOf(near) : "");
+                        btn.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+                    }
                 } else {
-                    buttonMatrix[x][y].setText(""+gameModel.getNumberOfCell(x,y));
+                    btn.setText(""); // non cliccata e non flag = vuota
+                    btn.setStyle(""); // reset stile
                 }
             }
         }
 
-        // then update this view here
+        // feedback bar
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         Date date = new Date(System.currentTimeMillis());
         System.out.println(this.getClass().getSimpleName() + " updated..." + dateFormat.format(date));
     }
+
 
 }

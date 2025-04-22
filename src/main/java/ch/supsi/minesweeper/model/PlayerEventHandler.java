@@ -13,4 +13,5 @@ public interface PlayerEventHandler extends EventHandler {
 
     void toggleFlag(int row, int col);
 
+    void selectCell(int row, int col);
 }
