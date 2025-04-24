@@ -1,5 +1,7 @@
     package ch.supsi.minesweeper.model;
 
+    import javafx.scene.input.MouseButton;
+
     public class GameModel extends AbstractModel implements GameEventHandler, PlayerEventHandler{
 
         private static GameModel myself;
@@ -7,7 +9,6 @@
         private int counter;
 
         private Grid grid;
-
 
         private GameModel() {
             super();
@@ -47,13 +48,29 @@
 
         @Override
         public void toggleFlag(int row, int col) {
-            grid.getCell(row, col).setFlag(true);
+            Cell cell = grid.getCell(row, col);
+            if (!cell.isClicked()) { // opzionale: evita di flaggare celle già aperte
+                cell.setFlag(!cell.isFlag()); // toggle: true -> false, false -> true
+            }
+        }
+
+        @Override
+        public void handleClick(int row, int col, MouseButton button) {
+            if (button == MouseButton.SECONDARY) {
+                toggleFlag(row, col);
+            } else if (button == MouseButton.PRIMARY) {
+                selectCell(row, col);
+            }
         }
 
         @Override
         public void selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             cell.setClicked(true);
+
+            if(cell.isIsaBomb()){
+                newGame();
+            }
         }
 
         public boolean isFlagged(int row, int col) {

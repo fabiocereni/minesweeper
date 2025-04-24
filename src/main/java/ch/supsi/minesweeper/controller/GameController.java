@@ -4,6 +4,8 @@ import ch.supsi.minesweeper.model.GameEventHandler;
 import ch.supsi.minesweeper.model.GameModel;
 import ch.supsi.minesweeper.model.PlayerEventHandler;
 import ch.supsi.minesweeper.view.DataView;
+import ch.supsi.minesweeper.view.GameBoardViewFxml;
+import javafx.scene.input.MouseButton;
 
 import java.util.List;
 
@@ -71,6 +73,13 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void selectCell(int row, int col) {
         this.gameModel.selectCell(row, col);
+        views.forEach(DataView::update);
+    }
+
+
+    @Override
+    public void handleClick(int row, int col, MouseButton button) {
+        this.gameModel.handleClick(row, col, button);
         views.forEach(DataView::update);
     }
 

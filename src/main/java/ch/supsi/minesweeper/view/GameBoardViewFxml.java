@@ -90,12 +90,9 @@ public class GameBoardViewFxml implements ControlledFxView {
                 int fy = y;
                 int fx = x;
                 buttonMatrix[y][x].setOnMouseClicked(event -> {
-                    if (event.getButton() == MouseButton.SECONDARY) {
-                        this.playerEventHandler.toggleFlag(fy, fx);
-                    } else if (event.getButton() == MouseButton.PRIMARY) {
-                        this.playerEventHandler.selectCell(fy, fx);
-                    }
+                    playerEventHandler.handleClick(fy, fx, event.getButton());
                 });
+
             }
         }
     }
