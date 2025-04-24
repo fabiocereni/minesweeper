@@ -63,12 +63,11 @@ public class GameBoardViewFxml implements ControlledFxView {
 
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
-                Button tmp = new Button(y+","+x);
+                Button tmp = new Button();
                 tmp.setAlignment(Pos.CENTER);
                 tmp.setFocusTraversable(false);
                 tmp.setMnemonicParsing(false);
-                tmp.setPrefHeight(37.0);
-                tmp.prefWidth(37.0);
+                tmp.setMinSize(37.0,37.0);
                 tmp.setTextAlignment(TextAlignment.CENTER);
                 buttonMatrix[y][x]=tmp;
             }
