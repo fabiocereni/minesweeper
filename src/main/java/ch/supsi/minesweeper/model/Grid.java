@@ -3,11 +3,10 @@ package ch.supsi.minesweeper.model;
 import java.util.Random;
 
 public class Grid {
-    private static final int size = 9;
-    private static final int maxNumBomb = size*size-1;
-    private static final int minNumBomb = 1;
+    public static final int size = 9;
+    public static final int maxNumBomb = size*size-1;
+    public static final int minNumBomb = 1;
     private static int bombs = 10;
-    private static int flags;
     private int numFlags = 0;
 
     private Cell[][] grid;
@@ -26,6 +25,7 @@ public class Grid {
             for (int x = 0; x < size; x++) {
                 grid[x][y].setIsaBomb(false);
                 grid[x][y].setFlag(false);
+                grid[x][y].setClicked(false);
                 grid[x][y].setNearBombs(0);
             }
         }
@@ -70,8 +70,14 @@ public class Grid {
         return grid[x][y];
     }
 
+    public int getNumFlags(){
+        return numFlags;
+    }
+
     public void incrementNumFlags(){
         numFlags++;
     }
+
+
 
 }

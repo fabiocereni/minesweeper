@@ -27,6 +27,7 @@
         @Override
         public void newGame() {
             counter = 0;
+            grid = new Grid();
             grid.defaultGrid();
             grid.placeBombs();
         }
@@ -50,7 +51,12 @@
         public void toggleFlag(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if (!cell.isClicked()) { // opzionale: evita di flaggare celle già aperte
-                cell.setFlag(!cell.isFlag()); // toggle: true -> false, false -> true
+                if(grid.getNumFlags() == Grid.maxNumBomb){
+                    // ALERT non puoi mettere altre flag
+                }else{
+                    cell.setFlag(!cell.isFlag()); // toggle: true -> false, false -> true
+                }
+
             }
         }
 
