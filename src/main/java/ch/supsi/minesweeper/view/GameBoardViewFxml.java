@@ -79,6 +79,7 @@ public class GameBoardViewFxml implements ControlledFxView {
             }
         }
         this.createBehaviour();
+        this.disableButtons();
     }
 
     private void createBehaviour() {
@@ -110,6 +111,12 @@ public class GameBoardViewFxml implements ControlledFxView {
                 Cell cell = gameModel.getCell(x, y);
                 Button btn = buttonMatrix[x][y];
 
+                if(cell.getState()){
+                    btn.setDisable(false);
+                }else{
+                    btn.setDisable(true);
+                }
+
                 if (cell.isFlag()) {
                     btn.setText("F");
                     btn.setStyle("-fx-background-color: green;");
@@ -133,6 +140,22 @@ public class GameBoardViewFxml implements ControlledFxView {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         Date date = new Date(System.currentTimeMillis());
         System.out.println(this.getClass().getSimpleName() + " updated..." + dateFormat.format(date));
+    }
+
+    public void activateButtons(){
+        for (int y=0; y<9; y++){
+            for (int x=0; x<9 ; x++){
+                buttonMatrix[y][x].setDisable(false);
+            }
+        }
+    }
+
+    public void disableButtons(){
+        for (int y=0; y<9; y++){
+            for (int x=0; x<9 ; x++){
+                buttonMatrix[y][x].setDisable(true);
+            }
+        }
     }
 
 

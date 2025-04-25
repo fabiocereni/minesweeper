@@ -14,13 +14,13 @@
             super();
             counter=0;
             grid = new Grid();
+            grid.disableButtons();
         }
 
         public static GameModel getInstance() {
             if (myself == null) {
                 myself = new GameModel();
             }
-
             return myself;
         }
 
@@ -30,6 +30,7 @@
             grid = new Grid();
             grid.defaultGrid();
             grid.placeBombs();
+            grid.activateButtons();
         }
 
         @Override
@@ -75,7 +76,8 @@
             cell.setClicked(true);
 
             if(cell.isIsaBomb()){
-                newGame();
+                grid.defaultGrid();
+                grid.disableButtons();
             }
         }
 

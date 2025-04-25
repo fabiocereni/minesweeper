@@ -6,11 +6,14 @@ public class Cell {
     private boolean clicked;
     private boolean isFlag;
 
+    private boolean state;
+
     public Cell() {
         this.isaBomb = false;
         this.nearBombs = 0;
         this.clicked = false;
         this.isFlag = false;
+        this.state = false;
     }
 
     public boolean isIsaBomb() {
@@ -49,5 +52,8 @@ public class Cell {
         this.clicked = clicked;
     }
 
+    public void setOnState(){this.state=true;}
+    public void setOffState(){this.state=false;}
 
+    public boolean getState(){return state;}
 }
