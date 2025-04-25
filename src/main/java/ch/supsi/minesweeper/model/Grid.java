@@ -78,6 +78,22 @@ public class Grid {
         numFlags++;
     }
 
+    public void activateButtons(){
+        for (int y=0; y<9; y++){
+            for (int x=0; x<9 ; x++){
+                this.grid[y][x].setOnState();
+            }
+        }
+    }
+
+    public void disableButtons(){
+        for (int y=0; y<9; y++){
+            for (int x=0; x<9 ; x++){
+                grid[y][x].setOffState();
+            }
+        }
+    }
+
 
 
 }
