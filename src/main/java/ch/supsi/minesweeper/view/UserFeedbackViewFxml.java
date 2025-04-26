@@ -26,8 +26,6 @@ public class UserFeedbackViewFxml implements UncontrolledFxView {
     @FXML
     private Text userFeedbackBar;
 
-
-
     private UserFeedbackViewFxml() {}
 
     public static UserFeedbackViewFxml getInstance() {
@@ -66,7 +64,7 @@ public class UserFeedbackViewFxml implements UncontrolledFxView {
         // then update this view here
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         Date date = new Date(System.currentTimeMillis());
-        this.userFeedbackBar.setText(" updated..." + dateFormat.format(date)+" Mosse:"+gameModel.getCounter());
+        this.userFeedbackBar.setText(" updated..." + dateFormat.format(date)+" Flag:" + gameModel.numberOfFlaggedCells());
     }
 
 }

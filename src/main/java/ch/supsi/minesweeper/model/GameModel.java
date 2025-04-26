@@ -56,8 +56,12 @@
                     // ALERT non puoi mettere altre flag
                 }else{
                     cell.setFlag(!cell.isFlag()); // toggle: true -> false, false -> true
+                    if(cell.isFlag()){
+                        grid.incrementNumFlags();
+                    } else {
+                        grid.decrementNumFlags();
+                    }
                 }
-
             }
         }
 
@@ -83,6 +87,10 @@
 
         public boolean isFlagged(int row, int col) {
             return grid.getCell(row, col).isFlag();
+        }
+
+        public int numberOfFlaggedCells() {
+            return grid.getNumFlags();
         }
 
         public int getCounter() {
