@@ -10,5 +10,6 @@ public interface GameEventHandler extends EventHandler {
 
     // add all the relevant missing behaviours
     // ...
+    void quit();
 
 }
