@@ -1,5 +1,6 @@
     package ch.supsi.minesweeper.model;
 
+    import ch.supsi.minesweeper.view.ErrorClickedBombFxml;
     import javafx.scene.input.MouseButton;
 
     public class GameModel extends AbstractModel implements GameEventHandler, PlayerEventHandler{
@@ -80,6 +81,7 @@
             cell.setClicked(true);
 
             if(cell.isIsaBomb()){
+                ErrorClickedBombFxml.showError();
                 grid.defaultGrid();
                 grid.disableButtons();
             }
