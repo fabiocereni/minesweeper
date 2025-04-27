@@ -2,6 +2,7 @@
 
     import ch.supsi.minesweeper.view.ConfirmExitPopupFxml;
     import ch.supsi.minesweeper.view.ErrorClickedBombFxml;
+    import ch.supsi.minesweeper.view.VictoryPopupFxml;
     import javafx.scene.input.MouseButton;
 
     public class GameModel extends AbstractModel implements GameEventHandler, PlayerEventHandler{
@@ -37,7 +38,6 @@
 
         @Override
         public void save() {
-
         }
 
         @Override
@@ -87,6 +87,7 @@
             cell.setClicked(true);
 
             if(cell.isIsaBomb()){
+                //VictoryPopupFxml.showVictory();
                 ErrorClickedBombFxml.showError();
                 grid.defaultGrid();
                 grid.disableButtons();
