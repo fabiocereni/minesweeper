@@ -1,5 +1,6 @@
     package ch.supsi.minesweeper.model;
 
+    import ch.supsi.minesweeper.view.ConfirmExitPopupFxml;
     import ch.supsi.minesweeper.view.ErrorClickedBombFxml;
     import javafx.scene.input.MouseButton;
 
@@ -37,6 +38,11 @@
         @Override
         public void save() {
 
+        }
+
+        @Override
+        public void quit() {
+            ConfirmExitPopupFxml.showConfirmExit();
         }
 
         @Override

@@ -49,6 +49,11 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         this.views.forEach(DataView::update);
     }
 
+    @Override
+    public void quit() {
+        this.gameModel.quit();
+    }
+
     // add all the relevant methods to handle all those defined by the GameEventHandler interface
     // ...
 

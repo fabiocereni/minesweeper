@@ -86,6 +86,7 @@ public class MenuBarViewFxml implements ControlledFxView {
 
         // add event handlers for all necessary menu items
         // ...
+        this.quitMenuItem.setOnAction(event -> this.gameEventHandler.quit());
     }
 
     @Override
