@@ -10,6 +10,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import l10n.application.PreferencesController;
+import l10n.application.TranslationsController;
 
 import java.util.List;
 
@@ -24,7 +26,14 @@ public class MainFx extends Application {
     private final GameEventHandler gameEventHandler;
     private final PlayerEventHandler playerEventHandler;
 
+    private final PreferencesController userPreferencesController;
+    private final TranslationsController translationsController;
+
+
     public MainFx() {
+        this.userPreferencesController = PreferencesController.getInstance();
+        this.translationsController = TranslationsController.getInstance();
+
         // GAME MODEL
         this.gameModel = GameModel.getInstance();
 
