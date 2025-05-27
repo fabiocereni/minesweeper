@@ -88,5 +88,11 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         views.forEach(DataView::update);
     }
 
+    @Override
+    public void revealEmptyCells(int startRow, int startCol){
+        this.gameLogic.revealEmptyCells(startRow, startCol);
+        views.forEach(DataView::update);
+    }
+
 
 }

@@ -2,6 +2,9 @@
 
     import javafx.scene.input.MouseButton;
 
+    import java.util.LinkedList;
+    import java.util.Queue;
+
     public class GameLogic{
 
         private static GameLogic myself;
@@ -113,6 +116,40 @@
 
         public Cell getCell(int x, int y) {
             return grid.getCell(x, y);
+        }
+
+        public void revealEmptyCells(int startRow, int startCol) {
+            int size = Grid.size;
+            boolean[][] visited = new boolean[size][size];
+            Queue<int[]> queue = new LinkedList<>();
+            queue.add(new int[]{startRow, startCol});
+            visited[startRow][startCol] = true;
+
+            while (!queue.isEmpty()) {
+                int[] position = queue.poll();
+                int row = position[0];
+                int col = position[1];
+                Cell cell = grid.getCell(row, col);
+                cell.setClicked(true);
+
+                if (cell.getNearBombs() == 0) {
+                    for (int dr = -1; dr <= 1; dr++) {
+                        for (int dc = -1; dc <= 1; dc++) {
+                            int newRow = row + dr;
+                            int newCol = col + dc;
+                            if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
+                                if (!visited[newRow][newCol]) {
+                                    Cell adjacentCell = grid.getCell(newRow, newCol);
+                                    if (!adjacentCell.isIsaBomb() && !adjacentCell.isClicked()) {
+                                        queue.add(new int[]{newRow, newCol});
+                                        visited[newRow][newCol] = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // add all the relevant missing behaviours

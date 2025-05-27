@@ -10,4 +10,5 @@ public interface GameEventHandler extends EventHandler {
     // ...
     void quit();
 
+    void revealEmptyCells(int startRow, int startCol);
 }
