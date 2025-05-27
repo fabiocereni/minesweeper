@@ -1,6 +1,5 @@
 package model;
 
-import controller.EventHandler;
 import javafx.scene.input.MouseButton;
 public interface PlayerEventHandler extends EventHandler {
 

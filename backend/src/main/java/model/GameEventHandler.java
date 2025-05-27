@@ -1,7 +1,5 @@
 package model;
 
-import controller.EventHandler;
-
 public interface GameEventHandler extends EventHandler {
 
     void newGame();
