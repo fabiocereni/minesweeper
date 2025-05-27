@@ -2,9 +2,9 @@ package controller;
 
 
 import javafx.scene.input.MouseButton;
-import model.GameEventHandler;
-import model.GameModel;
-import model.PlayerEventHandler;
+import Interface.GameEventHandler;
+import model.GameLogic;
+import Interface.PlayerEventHandler;
 import view.DataView;
 
 import java.util.List;
@@ -13,12 +13,12 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
 
     private static GameController myself;
 
-    private GameModel gameModel;
+    private GameLogic gameLogic;
 
     private List<DataView> views;
 
     private GameController () {
-        this.gameModel = GameModel.getInstance();
+        this.gameLogic = GameLogic.getInstance();
     }
 
     public static GameController getInstance() {
@@ -36,7 +36,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void newGame() {
         // do whatever you must do to start a new game
-        gameModel.newGame();
+        gameLogic.newGame();
         // then update your views
         this.views.forEach(DataView::update);
     }
@@ -51,7 +51,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
 
     @Override
     public void quit() {
-        this.gameModel.quit();
+        this.gameLogic.quit();
     }
 
     // add all the relevant methods to handle all those defined by the GameEventHandler interface
@@ -59,32 +59,32 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
 
     @Override
     public void move() {
-        this.gameModel.move();
+        this.gameLogic.move();
         views.forEach(DataView::update);
     }
 
     @Override
     public void openCell(int row, int col) {
-        this.gameModel.openCell(row, col);
+        this.gameLogic.openCell(row, col);
         views.forEach(DataView::update);
     }
 
     @Override
     public void toggleFlag(int row, int col) {
-        this.gameModel.toggleFlag(row, col);
+        this.gameLogic.toggleFlag(row, col);
         views.forEach(DataView::update);
     }
 
     @Override
     public void selectCell(int row, int col) {
-        this.gameModel.selectCell(row, col);
+        this.gameLogic.selectCell(row, col);
         views.forEach(DataView::update);
     }
 
 
     @Override
     public void handleClick(int row, int col, MouseButton button) {
-        this.gameModel.handleClick(row, col, button);
+        this.gameLogic.handleClick(row, col, button);
         views.forEach(DataView::update);
     }
 

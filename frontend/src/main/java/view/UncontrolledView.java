@@ -1,6 +1,6 @@
 package view;
 
-import model.AbstractModel;
+import Interface.AbstractModel;
 
 public interface UncontrolledView extends DataView {
 

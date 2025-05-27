@@ -1,13 +1,14 @@
 
+import Model.GameModel;
 import controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.AbstractModel;
-import model.GameEventHandler;
-import model.GameModel;
-import model.PlayerEventHandler;
+import Interface.AbstractModel;
+import Interface.GameEventHandler;
+import model.GameLogic;
+import Interface.PlayerEventHandler;
 import view.*;
 
 import java.util.List;
