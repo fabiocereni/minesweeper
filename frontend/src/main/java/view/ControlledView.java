@@ -1,8 +1,8 @@
 package view;
 
 
-import model.EventHandler;
-import model.AbstractModel;
+import Interface.EventHandler;
+import Interface.AbstractModel;
 
 public interface ControlledView extends DataView {
 

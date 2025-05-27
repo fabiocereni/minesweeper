@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import model.GameModel;
+import model.GameLogic;
 
 
 public class VictoryPopupFxml {
@@ -24,7 +24,7 @@ public class VictoryPopupFxml {
         Button exitButton = new Button("Esci");
 
         newGameButton.setOnAction(e -> {
-            GameModel.getInstance().newGame();
+            GameLogic.getInstance().newGame();
             popup.close();
         });
 

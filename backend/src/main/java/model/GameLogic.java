@@ -2,29 +2,29 @@
 
     import javafx.scene.input.MouseButton;
 
-    public class GameModel extends AbstractModel implements GameEventHandler, PlayerEventHandler{
+    public class GameLogic{
 
-        private static GameModel myself;
+        private static GameLogic myself;
 
         private int counter;
 
         private Grid grid;
 
-        private GameModel() {
+        private GameLogic() {
             super();
             counter=0;
             grid = new Grid();
             grid.disableButtons();
         }
 
-        public static GameModel getInstance() {
+        public static GameLogic getInstance() {
             if (myself == null) {
-                myself = new GameModel();
+                myself = new GameLogic();
             }
             return myself;
         }
 
-        @Override
+
         public void newGame() {
             counter = 0;
             grid = new Grid();
@@ -33,26 +33,26 @@
             grid.activateButtons();
         }
 
-        @Override
+
         public void save() {
         }
 
-        @Override
+
         public void quit() {
             //ConfirmExitPopupFxml.showConfirmExit();
         }
 
-        @Override
+
         public void move() {
             counter++;
         }
 
-        @Override
+
         public void openCell(int row, int col) {
 
         }
 
-        @Override
+
         public void toggleFlag(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if (!cell.isClicked()) { // opzionale: evita di flaggare celle già aperte
@@ -69,7 +69,7 @@
             }
         }
 
-        @Override
+
         public void handleClick(int row, int col, MouseButton button) {
             if (button == MouseButton.SECONDARY) {
                 toggleFlag(row, col);
@@ -78,7 +78,7 @@
             }
         }
 
-        @Override
+
         public void selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             cell.setClicked(true);
