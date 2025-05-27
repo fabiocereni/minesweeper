@@ -1,8 +1,6 @@
     package model;
 
     import javafx.scene.input.MouseButton;
-    import view.ErrorClickedBombFxml;
-    import view.ConfirmExitPopupFxml;
 
     public class GameModel extends AbstractModel implements GameEventHandler, PlayerEventHandler{
 
@@ -41,7 +39,7 @@
 
         @Override
         public void quit() {
-            ConfirmExitPopupFxml.showConfirmExit();
+            //ConfirmExitPopupFxml.showConfirmExit();
         }
 
         @Override
@@ -87,7 +85,7 @@
 
             if(cell.isIsaBomb()){
                 //VictoryPopupFxml.showVictory();
-                ErrorClickedBombFxml.showError();
+                //ErrorClickedBombFxml.showError();
                 grid.defaultGrid();
                 grid.disableButtons();
             }
