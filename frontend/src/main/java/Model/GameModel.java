@@ -66,4 +66,9 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
     public int numberOfFlaggedCells(){
         return gameLogic.numberOfFlaggedCells();
     }
+
+    @Override
+    public void revealEmptyCells(int startRow, int startCol){
+        gameLogic.revealEmptyCells(startRow,startCol);
+    }
 }
