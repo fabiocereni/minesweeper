@@ -70,7 +70,7 @@
         public void toggleFlag(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if (!cell.isClicked()) { // opzionale: evita di flaggare celle già aperte
-                if(grid.getNumFlags() == Grid.maxNumBomb){
+                if((grid.getNumFlags() == Grid.maxNumBomb)&&(!cell.isFlag())){
                     // ALERT non puoi mettere altre flag
                 }else{
                     cell.setFlag(!cell.isFlag()); // toggle: true -> false, false -> true
@@ -115,6 +115,9 @@
 
         public int numberOfFlaggedCells() {
             return grid.getNumFlags();
+        }
+        public int numberOfFlagRemaining(){
+            return grid.getNumberBombs()-grid.getNumFlags();
         }
 
         public int getCounter() {

@@ -56,8 +56,8 @@ public class GameApp {
         return gameLogic.getCell(x,y);
     }
 
-    public int numberOfFlaggedCells(){
-        return gameLogic.numberOfFlaggedCells();
+    public int numberOfFlagRemaining(){
+        return gameLogic.numberOfFlagRemaining();
     }
 
     public void revealEmptyCells(int startRow, int startCol){

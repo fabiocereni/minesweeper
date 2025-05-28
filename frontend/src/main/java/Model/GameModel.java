@@ -64,8 +64,8 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
     public Cell getCell(int x, int y){
         return gameApp.getCell(x,y);
     }
-    public int numberOfFlaggedCells(){
-        return gameApp.numberOfFlaggedCells();
+    public int numberOfFlagRemaining(){
+        return gameApp.numberOfFlagRemaining();
     }
 
     @Override

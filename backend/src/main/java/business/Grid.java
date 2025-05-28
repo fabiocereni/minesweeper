@@ -94,7 +94,7 @@ public class Grid {
         }
     }
 
-
-
-
+    public int getNumberBombs() {
+        return numberBombs;
+    }
 }
