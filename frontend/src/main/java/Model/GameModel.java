@@ -4,8 +4,8 @@ import Interface.AbstractModel;
 import Interface.GameEventHandler;
 import Interface.PlayerEventHandler;
 import javafx.scene.input.MouseButton;
-import data.Cell;
-import domain.GameLogic;
+import business.Cell;
+import application.GameLogic;
 
 public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler {
     GameLogic gameLogic;

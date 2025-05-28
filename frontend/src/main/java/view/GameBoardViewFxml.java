@@ -18,7 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import data.*;
+import business.*;
 
 
 public class GameBoardViewFxml implements ControlledFxView {

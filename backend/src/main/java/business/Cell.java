@@ -1,6 +1,6 @@
-package data;
+package business;
 
-public class Cell {
+public abstract class Cell {
     private boolean isaBomb;
     private int nearBombs;
     private boolean clicked;

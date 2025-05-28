@@ -1,4 +1,4 @@
-package data;
+package business;
 
 import java.util.Random;
 
