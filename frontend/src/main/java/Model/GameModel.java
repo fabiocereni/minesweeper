@@ -4,8 +4,8 @@ import Interface.AbstractModel;
 import Interface.GameEventHandler;
 import Interface.PlayerEventHandler;
 import javafx.scene.input.MouseButton;
-import model.Cell;
-import model.GameLogic;
+import data.Cell;
+import domain.GameLogic;
 
 public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler {
     GameLogic gameLogic;
@@ -71,4 +71,7 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
     public void revealEmptyCells(int startRow, int startCol){
         gameLogic.revealEmptyCells(startRow,startCol);
     }
+
+
+
 }
