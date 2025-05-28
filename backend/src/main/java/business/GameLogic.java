@@ -1,26 +1,33 @@
-    package application;
+    package business;
 
-    import business.Cell;
-    import business.Grid;
+    import data.GameSettings;
     import javafx.scene.input.MouseButton;
 
     import java.util.LinkedList;
     import java.util.Queue;
 
-    public class GameLogic{
+    public class GameLogic {
 
         private static GameLogic myself;
-
         private int counter;
-
         private Grid grid;
 
+        /*
         private GameLogic() {
-            super();
-            counter=0;
+            counter = 0;
             grid = new Grid();
             grid.disableButtons();
         }
+
+         */
+
+        private GameLogic() {
+            counter = 0;
+            int bombs = GameSettings.getInstance().getNumBombs();
+            grid = new Grid(bombs);
+            grid.disableButtons();
+        }
+
 
         public static GameLogic getInstance() {
             if (myself == null) {
@@ -29,12 +36,18 @@
             return myself;
         }
 
-
+        /*
         public void newGame() {
             counter = 0;
             grid = new Grid();
-            grid.defaultGrid();
-            grid.placeBombs();
+            grid.activateButtons();
+        }
+         */
+
+        public void newGame() {
+            counter = 0;
+            int bombs = GameSettings.getInstance().getNumBombs();
+            grid = new Grid(bombs);
             grid.activateButtons();
         }
 
@@ -42,21 +55,17 @@
         public void save() {
         }
 
-
         public void quit() {
             //ConfirmExitPopupFxml.showConfirmExit();
         }
-
 
         public void move() {
             counter++;
         }
 
-
         public void openCell(int row, int col) {
 
         }
-
 
         public void toggleFlag(int row, int col) {
             Cell cell = grid.getCell(row, col);
@@ -74,7 +83,6 @@
             }
         }
 
-
         public void handleClick(int row, int col, MouseButton button) {
             if (button == MouseButton.SECONDARY) {
                 toggleFlag(row, col);
@@ -83,12 +91,11 @@
             }
         }
 
-
         public void selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             cell.setClicked(true);
 
-            if(cell.isIsaBomb()){
+            if(cell.isaBomb()){
                 //VictoryPopupFxml.showVictory();
                 //ErrorClickedBombFxml.showError();
                 grid.showAll();
@@ -96,10 +103,11 @@
                 grid.disableButtons();
             }
 
-            if(cell.getNearBombs() == 0){
+            if(cell.isExpandable()){
                 revealEmptyCells(row, col);
             }
         }
+
 
         public boolean isFlagged(int row, int col) {
             return grid.getCell(row, col).isFlag();
@@ -114,7 +122,7 @@
         }
 
         public boolean isaBomb(int x, int y){
-            return grid.getCell(x,y).isIsaBomb();
+            return grid.getCell(x,y).isaBomb();
         }
 
         public int getNumberOfCell(int x, int y){
@@ -147,7 +155,7 @@
                             if (newRow >= 0 && newRow < size && newCol >= 0 && newCol < size) {
                                 if (!visited[newRow][newCol]) {
                                     Cell adjacentCell = grid.getCell(newRow, newCol);
-                                    if (!adjacentCell.isIsaBomb() && !adjacentCell.isClicked()) {
+                                    if (!adjacentCell.isaBomb() && !adjacentCell.isClicked()) {
                                         queue.add(new int[]{newRow, newCol});
                                         visited[newRow][newCol] = true;
                                     }
@@ -158,9 +166,5 @@
                 }
             }
         }
-
-        // add all the relevant missing behaviours
-        // ...
-
 
     }

@@ -3,16 +3,17 @@ package Model;
 import Interface.AbstractModel;
 import Interface.GameEventHandler;
 import Interface.PlayerEventHandler;
+import application.GameApp;
 import javafx.scene.input.MouseButton;
 import business.Cell;
-import application.GameLogic;
+import business.GameLogic;
 
 public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler {
-    GameLogic gameLogic;
     private static GameModel myself;
+    GameApp gameApp;
 
-    public GameModel(){
-        this.gameLogic = GameLogic.getInstance();
+    private GameModel(){
+        this.gameApp = GameApp.getInstance();
     }
     public static GameModel getInstance() {
         if (myself == null) {
@@ -23,53 +24,53 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
 
     @Override
     public void newGame() {
-        gameLogic.newGame();
+        gameApp.newGame();
     }
 
     @Override
     public void save() {
-        gameLogic.save();
+        gameApp.save();
     }
 
     @Override
     public void quit() {
-        gameLogic.quit();
+        gameApp.quit();
     }
 
     @Override
     public void move() {
-        gameLogic.move();
+        gameApp.move();
     }
 
     @Override
     public void openCell(int row, int col) {
-        gameLogic.openCell(row,col);
+        gameApp.openCell(row,col);
     }
 
     @Override
     public void toggleFlag(int row, int col) {
-        gameLogic.toggleFlag(row,col);
+        gameApp.toggleFlag(row,col);
     }
 
     @Override
     public void selectCell(int row, int col) {
-        gameLogic.selectCell(row,col);
+        gameApp.selectCell(row,col);
     }
 
     @Override
     public void handleClick(int row, int col, MouseButton button) {
-        gameLogic.handleClick(row,col,button);
+        gameApp.handleClick(row,col,button);
     }
     public Cell getCell(int x, int y){
-        return gameLogic.getCell(x,y);
+        return gameApp.getCell(x,y);
     }
     public int numberOfFlaggedCells(){
-        return gameLogic.numberOfFlaggedCells();
+        return gameApp.numberOfFlaggedCells();
     }
 
     @Override
     public void revealEmptyCells(int startRow, int startCol){
-        gameLogic.revealEmptyCells(startRow,startCol);
+        gameApp.revealEmptyCells(startRow,startCol);
     }
 
 

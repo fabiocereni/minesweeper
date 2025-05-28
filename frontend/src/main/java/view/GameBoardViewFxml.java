@@ -4,6 +4,7 @@ import Interface.AbstractModel;
 import Interface.EventHandler;
 import Interface.PlayerEventHandler;
 import Model.GameModel;
+import controller.GameController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -24,22 +25,19 @@ import business.*;
 public class GameBoardViewFxml implements ControlledFxView {
 
     private static GameBoardViewFxml myself;
-
     private PlayerEventHandler playerEventHandler;
-
     private GameModel gameModel;
-
+    private GameController gameController;
     private Button[][] buttonMatrix = new Button[9][9];
 
     @FXML
     private GridPane containerPane;
     
-    private GameBoardViewFxml() {}
+    private GameBoardViewFxml() { }
 
     public static GameBoardViewFxml getInstance() {
         if (myself == null) {
             myself = new GameBoardViewFxml();
-
             try {
                 URL fxmlUrl = GameBoardViewFxml.class.getResource("/gameboard.fxml");
                 if (fxmlUrl != null) {
@@ -52,7 +50,6 @@ public class GameBoardViewFxml implements ControlledFxView {
                 throw new RuntimeException(e);
             }
         }
-
         return myself;
     }
 
@@ -121,7 +118,7 @@ public class GameBoardViewFxml implements ControlledFxView {
                     btn.setText("F");
                     btn.setStyle("-fx-background-color: green;");
                 } else if (cell.isClicked()) {
-                    if (cell.isIsaBomb()) {
+                    if (cell.isaBomb()) {
                         btn.setText("B");
                         btn.setStyle("-fx-background-color: yellow;");
                     } else {

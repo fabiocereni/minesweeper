@@ -12,9 +12,7 @@ import java.util.List;
 public class GameController implements GameEventHandler, PlayerEventHandler {
 
     private static GameController myself;
-
     private GameModel gameModel;
-
     private List<DataView> views;
 
     private GameController () {
@@ -25,7 +23,6 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         if (myself == null) {
             myself = new GameController();
         }
-
         return myself;
     }
 
@@ -35,62 +32,54 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
 
     @Override
     public void newGame() {
-        // do whatever you must do to start a new game
         gameModel.newGame();
-        // then update your views
         this.views.forEach(DataView::update);
     }
 
     @Override
     public void save() {
-        // do whatever you must do to start a new game
-
-        // then update your views
+        // BISOGNA AGGIUNGERE IL SALVATAGGIO
         this.views.forEach(DataView::update);
     }
 
     @Override
     public void quit() {
-        this.gameModel.quit();
+        gameModel.quit();
     }
-
-    // add all the relevant methods to handle all those defined by the GameEventHandler interface
-    // ...
 
     @Override
     public void move() {
-        this.gameModel.move();
+        gameModel.move();
         views.forEach(DataView::update);
     }
 
     @Override
     public void openCell(int row, int col) {
-        this.gameModel.openCell(row, col);
+        gameModel.openCell(row, col);
         views.forEach(DataView::update);
     }
 
     @Override
     public void toggleFlag(int row, int col) {
-        this.gameModel.toggleFlag(row, col);
+        gameModel.toggleFlag(row, col);
         views.forEach(DataView::update);
     }
 
     @Override
     public void selectCell(int row, int col) {
-        this.gameModel.selectCell(row, col);
+        gameModel.selectCell(row, col);
         views.forEach(DataView::update);
     }
 
-
     @Override
     public void handleClick(int row, int col, MouseButton button) {
-        this.gameModel.handleClick(row, col, button);
+        gameModel.handleClick(row, col, button);
         views.forEach(DataView::update);
     }
 
     @Override
     public void revealEmptyCells(int startRow, int startCol){
-        this.gameModel.revealEmptyCells(startRow, startCol);
+        gameModel.revealEmptyCells(startRow, startCol);
         views.forEach(DataView::update);
     }
 
