@@ -7,7 +7,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import Interface.AbstractModel;
 import Interface.GameEventHandler;
-import model.GameLogic;
 import Interface.PlayerEventHandler;
 import view.*;
 

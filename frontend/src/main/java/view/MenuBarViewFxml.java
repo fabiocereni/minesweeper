@@ -4,7 +4,6 @@ import Interface.AbstractModel;
 import Interface.EventHandler;
 import Interface.GameEventHandler;
 import Model.GameModel;
-import model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

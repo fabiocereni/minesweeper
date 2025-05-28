@@ -13,7 +13,6 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import model.*;
 
 public class UserFeedbackViewFxml implements UncontrolledFxView {
 

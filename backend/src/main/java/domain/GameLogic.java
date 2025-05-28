@@ -1,5 +1,7 @@
-    package model;
+    package domain;
 
+    import data.Cell;
+    import data.Grid;
     import javafx.scene.input.MouseButton;
 
     import java.util.LinkedList;
@@ -89,8 +91,13 @@
             if(cell.isIsaBomb()){
                 //VictoryPopupFxml.showVictory();
                 //ErrorClickedBombFxml.showError();
-                grid.defaultGrid();
+                grid.showAll();
+                //grid.defaultGrid();
                 grid.disableButtons();
+            }
+
+            if(cell.getNearBombs() == 0){
+                revealEmptyCells(row, col);
             }
         }
 
