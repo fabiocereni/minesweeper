@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import view.SettingsView;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,6 +89,12 @@ public class MenuBarViewFxml implements ControlledFxView {
         // add event handlers for all necessary menu items
         // ...
         this.quitMenuItem.setOnAction(event -> this.gameEventHandler.quit());
+
+        this.preferencesMenuItem.setOnAction(event -> {
+            SettingsView settingsView = new SettingsView();
+            settingsView.show();
+        });
+
     }
 
     @Override
