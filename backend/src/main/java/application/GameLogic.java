@@ -1,7 +1,7 @@
-    package domain;
+    package application;
 
-    import data.Cell;
-    import data.Grid;
+    import business.Cell;
+    import business.Grid;
     import javafx.scene.input.MouseButton;
 
     import java.util.LinkedList;
