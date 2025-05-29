@@ -79,12 +79,13 @@
             }
         }
 
-        public void handleClick(int row, int col, MouseButton button) {
+        public int handleClick(int row, int col, MouseButton button) {
             if (button == MouseButton.SECONDARY) {
                 toggleFlag(row, col);
             } else if (button == MouseButton.PRIMARY) {
-                selectCell(row, col);
+                return selectCell(row, col);
             }
+            return 0;
         }
 
         public int selectCell(int row, int col) {
