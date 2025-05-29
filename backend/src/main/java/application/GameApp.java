@@ -44,8 +44,8 @@ public class GameApp {
         gameLogic.selectCell(row,col);
     }
 
-    public void handleClick(int row, int col, MouseButton button) {
-        gameLogic.handleClick(row,col,button);
+    public int handleClick(int row, int col, MouseButton button) {
+        return gameLogic.handleClick(row,col,button);
     }
 
     public Cell getCell(int x, int y){

@@ -59,8 +59,8 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
     }
 
     @Override
-    public void handleClick(int row, int col, MouseButton button) {
-        gameApp.handleClick(row,col,button);
+    public int handleClick(int row, int col, MouseButton button) {
+        return gameApp.handleClick(row,col,button);
     }
     public Cell getCell(int x, int y){
         return gameApp.getCell(x,y);
