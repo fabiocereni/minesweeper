@@ -87,7 +87,7 @@
             }
         }
 
-        public void selectCell(int row, int col) {
+        public int selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             cell.setClicked(true);
 
@@ -97,11 +97,21 @@
                 grid.showAll();
                 //grid.defaultGrid();
                 grid.disableButtons();
+                System.out.println("hai perso");
+                return -1;
             }
 
             if(cell.isExpandable()){
                 revealEmptyCells(row, col);
             }
+
+            if(grid.getNumberOfOpenCell()==((Grid.size*Grid.size)-grid.getNumberBombs())){
+                System.out.println("vittoria");
+                grid.showAll();
+                grid.disableButtons();
+                return 1;
+            }
+            return 0;
         }
 
 
