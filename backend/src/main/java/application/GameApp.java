@@ -28,10 +28,6 @@ public class GameApp {
         gameLogic.save();
     }
 
-    public void quit() {
-        gameLogic.quit();
-    }
-
     public void move() {
         gameLogic.move();
     }

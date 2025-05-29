@@ -7,6 +7,7 @@ import application.GameApp;
 import javafx.scene.input.MouseButton;
 import business.Cell;
 import business.GameLogic;
+import view.ConfirmExitPopupFxml;
 
 public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler {
     private static GameModel myself;
@@ -34,7 +35,7 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
 
     @Override
     public void quit() {
-        gameApp.quit();
+        ConfirmExitPopupFxml.showConfirmExit();
     }
 
     @Override
@@ -76,6 +77,16 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
         gameApp.revealEmptyCells(startRow,startCol);
     }
 
+
+    // BISOGNA TROVARE UN MODO PER RIMUOVERLO
+    @Override
+    public void about() {
+    }
+
+    @Override
+    public void help() {
+
+    }
 
 
 }

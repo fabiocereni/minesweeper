@@ -55,10 +55,6 @@
         public void save() {
         }
 
-        public void quit() {
-            //ConfirmExitPopupFxml.showConfirmExit();
-        }
-
         public void move() {
             counter++;
         }

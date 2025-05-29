@@ -59,12 +59,8 @@ public class UserFeedbackViewFxml implements UncontrolledFxView {
     }
 
     @Override
-    public void update() {
-        // get your data from the model, if needed
-        // then update this view here
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date date = new Date(System.currentTimeMillis());
-        this.userFeedbackBar.setText("Number mine: " + gameModel.numberOfBombs() + " - Flag remaining: " + gameModel.numberOfFlagRemaining());
+    public void update(String sentence) {
+        this.userFeedbackBar.setText(sentence);
     }
 
 }

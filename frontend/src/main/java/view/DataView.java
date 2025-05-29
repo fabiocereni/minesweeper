@@ -2,6 +2,6 @@ package view;
 
 public interface DataView {
 
-    void update();
+    void update(String sentence);
 
 }
