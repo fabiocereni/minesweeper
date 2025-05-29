@@ -6,9 +6,11 @@ public interface GameEventHandler extends EventHandler {
 
     void save();
 
-    // add all the relevant missing behaviours
-    // ...
     void quit();
 
     void revealEmptyCells(int startRow, int startCol);
+
+    void about();
+
+    void help();
 }
