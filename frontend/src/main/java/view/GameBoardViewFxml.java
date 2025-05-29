@@ -117,12 +117,12 @@ public class GameBoardViewFxml implements ControlledFxView {
                 }
 
                 if (cell.isFlag()) {
-                    btn.setText("F");
+                    btn.setText("!");
                     btn.setStyle("-fx-background-color: yellow;");
                 } else if (cell.isClicked()) {
                     if (cell.isaBomb()) {
-                        btn.setText("B");
-                        btn.setStyle("-fx-background-color: red;");
+                        btn.setText("X");
+                        btn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
                         createDelayedDisabling();
                     } else {
                         int near = cell.getNearBombs();
