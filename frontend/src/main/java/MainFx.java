@@ -2,8 +2,12 @@
 import Model.GameModel;
 import controller.GameController;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import Interface.AbstractModel;
 import Interface.GameEventHandler;
@@ -45,37 +49,36 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // handle the main window close request
-        // in real life, this event should not be dealt with here!
-        // it should actually be delegated to a suitable ExitController!
-        primaryStage.setOnCloseRequest(
-                windowEvent -> {
-                    // consume the window event (the main window would be closed otherwise no matter what)
-                    windowEvent.consume();
+        VBox homeScreen = new VBox(20);
+        homeScreen.setAlignment(Pos.CENTER);
 
-                    // quit the app
-                    // replace this hard close
-                    // by delegating the work to a suitable controller
-                    primaryStage.close();
-                }
-        );
+        Button newGameButton = new Button("New Game");
+        Button quitButton = new Button("Quit");
 
-        // SCAFFOLDING OF MAIN PANE
+        newGameButton.setPrefWidth(200);
+        newGameButton.setPrefHeight(30);
+
+        quitButton.setPrefWidth(200);
+        quitButton.setPrefHeight(30);
+
+        homeScreen.getChildren().addAll(newGameButton, quitButton);
+        Scene homeScene = new Scene(new StackPane(homeScreen), 400, 300);
+
         BorderPane mainBorderPane = new BorderPane();
         mainBorderPane.setTop(this.menuBarView.getNode());
         mainBorderPane.setCenter(this.gameBoardView.getNode());
         mainBorderPane.setBottom(this.userFeedbackView.getNode());
+        Scene gameScene = new Scene(mainBorderPane);
 
-        // SCENE
-        Scene scene = new Scene(mainBorderPane);
+        newGameButton.setOnAction(e -> primaryStage.setScene(gameScene));
+        quitButton.setOnAction(e -> primaryStage.close());
 
-        // PRIMARY STAGE
-        primaryStage.setTitle(MainFx.APP_TITLE);
+        primaryStage.setTitle(APP_TITLE);
         primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
-        primaryStage.toFront();
+        primaryStage.setScene(homeScene);
         primaryStage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);
