@@ -90,11 +90,27 @@ public class Grid {
         for(int y = 0; y<size; y++){
             for (int x = 0; x < size; x++) {
                 grid[x][y].setClicked(true);
+                if(grid[x][y].isaBomb()){
+                    grid[x][y].setFlag(false);
+                }
             }
         }
     }
 
     public int getNumberBombs() {
         return numberBombs;
+    }
+    public int getNumberOfOpenCell(){
+        int numOfCellOpen=0;
+        for(int y = 0; y<size; y++){
+            for (int x = 0; x < size; x++) {
+
+                if(grid[x][y].isClicked()){
+                    numOfCellOpen++;
+                }
+
+            }
+        }
+        return numOfCellOpen;
     }
 }

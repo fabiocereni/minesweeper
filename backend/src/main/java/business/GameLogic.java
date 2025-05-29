@@ -79,15 +79,16 @@
             }
         }
 
-        public void handleClick(int row, int col, MouseButton button) {
+        public int handleClick(int row, int col, MouseButton button) {
             if (button == MouseButton.SECONDARY) {
                 toggleFlag(row, col);
             } else if (button == MouseButton.PRIMARY) {
-                selectCell(row, col);
+                return selectCell(row, col);
             }
+            return 0;
         }
 
-        public void selectCell(int row, int col) {
+        public int selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             cell.setClicked(true);
 
@@ -97,11 +98,21 @@
                 grid.showAll();
                 //grid.defaultGrid();
                 grid.disableButtons();
+                System.out.println("hai perso");
+                return -1;
             }
 
             if(cell.isExpandable()){
                 revealEmptyCells(row, col);
             }
+
+            if(grid.getNumberOfOpenCell()==((Grid.size*Grid.size)-grid.getNumberBombs())){
+                System.out.println("vittoria");
+                grid.showAll();
+                grid.disableButtons();
+                return 1;
+            }
+            return 0;
         }
 
 
