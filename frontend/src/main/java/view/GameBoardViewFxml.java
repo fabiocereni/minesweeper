@@ -5,6 +5,7 @@ import Interface.EventHandler;
 import Interface.PlayerEventHandler;
 import Model.GameModel;
 import controller.GameController;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -20,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import business.*;
+
+import static java.lang.Thread.sleep;
 
 
 public class GameBoardViewFxml implements ControlledFxView {
@@ -108,23 +111,23 @@ public class GameBoardViewFxml implements ControlledFxView {
                 Cell cell = gameModel.getCell(x, y);
                 Button btn = buttonMatrix[x][y];
 
+
                 if(cell.getState()){
                     btn.setDisable(false);
-                }else{
-                    btn.setDisable(true);
                 }
 
                 if (cell.isFlag()) {
                     btn.setText("F");
-                    btn.setStyle("-fx-background-color: green;");
+                    btn.setStyle("-fx-background-color: yellow;");
                 } else if (cell.isClicked()) {
                     if (cell.isaBomb()) {
                         btn.setText("B");
-                        btn.setStyle("-fx-background-color: yellow;");
+                        btn.setStyle("-fx-background-color: red;");
+                        createDelayedDisabling();
                     } else {
                         int near = cell.getNearBombs();
                         btn.setText(near > 0 ? String.valueOf(near) : "");
-                        btn.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+                        btn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
                     }
                 } else {
                     btn.setText(""); // non cliccata e non flag = vuota
@@ -138,6 +141,13 @@ public class GameBoardViewFxml implements ControlledFxView {
         Date date = new Date(System.currentTimeMillis());
         System.out.println(this.getClass().getSimpleName() + " updated..." + dateFormat.format(date));
     }
+
+    private void createDelayedDisabling() {
+        PauseTransition pause = new PauseTransition(javafx.util.Duration.seconds(1));
+        pause.setOnFinished(event -> disableButtons());
+        pause.play();
+    }
+
 
     public void activateButtons(){
         for (int y=0; y<9; y++){
