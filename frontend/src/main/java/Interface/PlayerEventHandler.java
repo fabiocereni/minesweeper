@@ -14,5 +14,5 @@ public interface PlayerEventHandler extends EventHandler {
 
     void selectCell(int row, int col);
 
-    void handleClick(int row, int col, MouseButton button);
+    int handleClick(int row, int col, MouseButton button);
 }

@@ -73,9 +73,25 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     }
 
     @Override
-    public void handleClick(int row, int col, MouseButton button) {
-        gameModel.handleClick(row, col, button);
-        views.forEach(dataView -> dataView.update(""));
+    public int handleClick(int row, int col, MouseButton button) {
+
+        switch (gameModel.handleClick(row, col, button)){
+            case -1:
+                views.forEach(dataView -> dataView.update("Hai Perso"));
+                break;
+            case 0:
+                views.forEach(dataView -> dataView.update(""));
+                break;
+            case 1:
+                views.forEach(dataView -> dataView.update("Vittoria!"));
+                break;
+            default:
+                views.forEach(dataView -> dataView.update(""));
+                break;
+        }
+
+
+        return 0;
     }
 
     @Override
