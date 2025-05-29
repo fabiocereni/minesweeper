@@ -64,4 +64,7 @@ public class GameApp {
         gameLogic.revealEmptyCells(startRow,startCol);
     }
 
+    public int numberOfBombs() {
+        return gameLogic.numberOfBombs();
+    }
 }

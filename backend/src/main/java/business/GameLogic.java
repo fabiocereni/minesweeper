@@ -120,6 +120,10 @@
             return grid.getNumberBombs()-grid.getNumFlags();
         }
 
+        public int numberOfBombs() {
+            return grid.getNumberBombs();
+        }
+
         public int getCounter() {
             return counter;
         }
@@ -169,5 +173,4 @@
                 }
             }
         }
-
     }
