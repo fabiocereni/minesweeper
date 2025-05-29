@@ -20,6 +20,7 @@ public class SettingsView {
 
         Label bombLabel = new Label("Numero Bombe:");
         bombsSpinner = new Spinner<>();
+        bombsSpinner.setEditable(true);
         bombsSpinner.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(
                         1, Grid.size*Grid.size - 1 , settings.getNumBombs()
