@@ -51,25 +51,21 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void move() {
         gameModel.move();
-        views.forEach(dataView -> dataView.update(""));
     }
 
     @Override
     public void openCell(int row, int col) {
         gameModel.openCell(row, col);
-        views.forEach(dataView -> dataView.update(""));
     }
 
     @Override
     public void toggleFlag(int row, int col) {
         gameModel.toggleFlag(row, col);
-        views.forEach(dataView -> dataView.update(""));
     }
 
     @Override
     public void selectCell(int row, int col) {
         gameModel.selectCell(row, col);
-        views.forEach(dataView -> dataView.update(""));
     }
 
     @Override
@@ -80,7 +76,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
                 views.forEach(dataView -> dataView.update("Hai Perso"));
                 break;
             case 0:
-                views.forEach(dataView -> dataView.update(""));
+                views.forEach(dataView -> dataView.update("Number bombs: " + gameModel.numberOfBombs() + " - Flag remaining: " + gameModel.numberOfFlagRemaining()));
                 break;
             case 1:
                 views.forEach(dataView -> dataView.update("Vittoria!"));

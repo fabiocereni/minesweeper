@@ -16,6 +16,7 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
     private GameModel(){
         this.gameApp = GameApp.getInstance();
     }
+
     public static GameModel getInstance() {
         if (myself == null) {
             myself = new GameModel();
