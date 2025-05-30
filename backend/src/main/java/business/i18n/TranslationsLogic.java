@@ -47,4 +47,21 @@ public class TranslationsLogic implements ITranslationsLogic {
     public String translate(String key) {
         return this.translations.getProperty(key);
     }
+
+    @Override
+    public List<String> getSupportedLanguageTags() {
+        return getSupportedLanguageTags();
+    }
+
+    @Override
+    public String getLanguage() {
+        return translationsDao.getLanguage();
+    }
+
+    @Override
+    public void setLanguage(String languageTag) {
+        translationsDao.setLanguage(languageTag);
+    }
+
+
 }

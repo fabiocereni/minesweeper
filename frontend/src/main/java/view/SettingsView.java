@@ -9,10 +9,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class SettingsView {
 
     private final Stage stage;
     private final Spinner<Integer> bombsSpinner;
+    private final ComboBox<String> languageComboBox;
     private final TranslationsController translationsController = TranslationsController.getInstance();
 
     public SettingsView() {
@@ -29,13 +32,21 @@ public class SettingsView {
                 )
         );
 
+        Label languageLabel = new Label(translationsController.translate("label.languageSettings"));
+        languageComboBox = new ComboBox<>();
+        List<String> supportedLanguages = translationsController.getSupportedLanguageTags();
+        languageComboBox.getItems().addAll(supportedLanguages);
+        languageComboBox.setValue(supportedLanguages.get(0));
+
         Button saveButton = new Button(translationsController.translate("label.buttonSettings"));
         saveButton.setOnAction(event -> saveSettings());
 
         VBox layout = new VBox(10, titleLabel,
                 new HBox(10, bombLabel, bombsSpinner),
+                new HBox(10, languageLabel, languageComboBox), // Aggiungi il ComboBox con l'etichetta
                 saveButton
         );
+
         layout.setPadding(new Insets(15));
         layout.setStyle("-fx-background-color: #f4f4f4");
 
@@ -47,9 +58,11 @@ public class SettingsView {
 
     private void saveSettings() {
         int bombs = bombsSpinner.getValue();
+        String languageTag = languageComboBox.getValue();
 
         GameSettings settings = GameSettings.getInstance();
         settings.setNumBombs(bombs);
+        translationsController.setLanguage(languageTag);
         settings.save();
 
         // opzionale: feedback

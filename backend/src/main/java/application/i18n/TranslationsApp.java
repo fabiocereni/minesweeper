@@ -3,6 +3,8 @@ package application.i18n;
 import business.i18n.PreferencesLogic;
 import business.i18n.TranslationsLogic;
 
+import java.util.List;
+
 public class TranslationsApp {
 
     private static TranslationsApp myself;
@@ -13,8 +15,7 @@ public class TranslationsApp {
         this.translationsLogic = TranslationsLogic.getInstance();
         this.preferencesLogic = PreferencesLogic.getInstance();
 
-        String currentLanguage = this.preferencesLogic.getCurrentLanguage();
-        this.translationsLogic.changeLanguage("it-CH");
+        this.translationsLogic.changeLanguage(translationsLogic.getLanguage());
     }
 
     public static TranslationsApp getInstance() {
@@ -26,6 +27,14 @@ public class TranslationsApp {
 
     public String translate(String key) {
         return this.translationsLogic.translate(key);
+    }
+
+    public List<String> getSupportedLanguageTags() {
+        return this.translationsLogic.getSupportedLanguageTags();
+    }
+
+    public void setLanguage(String languageTag) {
+        translationsLogic.setLanguage(languageTag);
     }
 
 }

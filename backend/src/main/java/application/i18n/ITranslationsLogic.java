@@ -1,5 +1,7 @@
 package application.i18n;
 
+import java.util.List;
+
 public interface ITranslationsLogic {
 
     boolean isSupportedLanguageTag(String languageTag);
@@ -7,5 +9,11 @@ public interface ITranslationsLogic {
     boolean changeLanguage(String languageTag);
 
     String translate(String key);
+
+    List<String> getSupportedLanguageTags();
+
+    String getLanguage();
+
+    void setLanguage(String languageTag);
 
 }

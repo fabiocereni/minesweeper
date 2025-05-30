@@ -1,5 +1,6 @@
 package data;
 
+import business.i18n.ISetLanguage;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,15 +14,18 @@ public class GameSettings {
     private static final String SETTINGS_FILE = "minesweeper_settings.json";
 
     private static final int DEFAULT_BOMBS = 10;
+    private static final String DEFAULT_LANGUAGE = "en-US";
     private static final int MIN_BOMBS = 1;
     private static final int MAX_BOMBS = 80;
     private int numBombs;
+    private String language;
 
     private static GameSettings instance;
 
     // Costruttore richiesto da Jackson e fallback
     public GameSettings() {
         this.numBombs = DEFAULT_BOMBS;
+        this.language = DEFAULT_LANGUAGE;
     }
 
     public static GameSettings getInstance() {
@@ -39,6 +43,13 @@ public class GameSettings {
         }
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String languageTag) {
+        this.language = languageTag;
+    }
 
     public int getNumBombs() {
         return numBombs;
