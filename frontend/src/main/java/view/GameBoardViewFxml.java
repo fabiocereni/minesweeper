@@ -1,9 +1,10 @@
 package view;
 
-import Interface.AbstractModel;
-import Interface.EventHandler;
-import Interface.PlayerEventHandler;
+import Model.AbstractModel;
+import controller.EventHandler;
+import controller.PlayerEventHandler;
 import Model.GameModel;
+import controller.ControlledFxView;
 import controller.GameController;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -61,6 +62,13 @@ public class GameBoardViewFxml implements ControlledFxView {
         this.playerEventHandler = (PlayerEventHandler) eventHandler;
         this.gameModel = (GameModel) model;
 
+        createButton();
+
+        this.createBehaviour();
+        this.disableButtons();
+    }
+
+    private void createButton() {
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
                 Button tmp = new Button();
@@ -72,14 +80,11 @@ public class GameBoardViewFxml implements ControlledFxView {
                 buttonMatrix[y][x]=tmp;
             }
         }
-
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
                 containerPane.add(buttonMatrix[y][x],y,x);
             }
         }
-        this.createBehaviour();
-        this.disableButtons();
     }
 
     private void createBehaviour() {

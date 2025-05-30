@@ -1,4 +1,4 @@
-package Interface;
+package Model;
 
 public abstract class AbstractModel {
 }

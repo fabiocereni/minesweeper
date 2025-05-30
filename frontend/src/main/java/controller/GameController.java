@@ -2,10 +2,8 @@ package controller;
 
 
 import Model.GameModel;
+import controller.l10n.TranslationsController;
 import javafx.scene.input.MouseButton;
-import Interface.GameEventHandler;
-import Interface.PlayerEventHandler;
-import view.ConfirmExitPopupFxml;
 import view.DataView;
 
 import java.util.List;
@@ -15,9 +13,11 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     private static GameController myself;
     private GameModel gameModel;
     private List<DataView> views;
+    private final TranslationsController translationsController;
 
     private GameController () {
         this.gameModel = GameModel.getInstance();
+        this.translationsController = TranslationsController.getInstance();
     }
 
     public static GameController getInstance() {
@@ -34,7 +34,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void newGame() {
         gameModel.newGame();
-        this.views.forEach(dataView -> dataView.update("Number bombs: " + gameModel.numberOfBombs() + " - Flag remaining: " + gameModel.numberOfFlagRemaining()));
+        views.forEach(dataView -> dataView.update(translationsController.translate("label.infoBombs") + ": " + gameModel.numberOfBombs() + " - " +  translationsController.translate("label.infoFlags") + " : " + gameModel.numberOfFlagRemaining()));
     }
 
     @Override
@@ -73,13 +73,13 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
 
         switch (gameModel.handleClick(row, col, button)){
             case -1:
-                views.forEach(dataView -> dataView.update("Hai Perso"));
+                views.forEach(dataView -> dataView.update(translationsController.translate("label.lost")));
                 break;
             case 0:
-                views.forEach(dataView -> dataView.update("Number bombs: " + gameModel.numberOfBombs() + " - Flag remaining: " + gameModel.numberOfFlagRemaining()));
+                views.forEach(dataView -> dataView.update(translationsController.translate("label.infoBombs") + ": " + gameModel.numberOfBombs() + " - " +  translationsController.translate("label.infoFlags") + " : " + gameModel.numberOfFlagRemaining()));
                 break;
             case 1:
-                views.forEach(dataView -> dataView.update("Vittoria!"));
+                views.forEach(dataView -> dataView.update(translationsController.translate("label.win")));
                 break;
             default:
                 views.forEach(dataView -> dataView.update(""));
@@ -98,12 +98,12 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
 
     @Override
     public void about() {
-        views.forEach(dataView -> dataView.update("MineSweeper v1.0 by group03"));
+        views.forEach(dataView -> dataView.update(translationsController.translate("label.infoAbout")));
     }
 
     @Override
     public void help() {
-        views.forEach(dataView -> dataView.update("Please don’t click on the bombs \uD83D\uDCA3"));
+        views.forEach(dataView -> dataView.update(translationsController.translate("label.infoHelp") + " \uD83D\uDCA3"));
     }
 
 

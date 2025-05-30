@@ -1,16 +1,17 @@
 package view;
 
-import Interface.AbstractModel;
-import Interface.EventHandler;
-import Interface.GameEventHandler;
+import Model.AbstractModel;
+import controller.EventHandler;
+import controller.GameEventHandler;
 import Model.GameModel;
+import controller.ControlledFxView;
+import controller.l10n.TranslationsController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import view.SettingsView;
 
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class MenuBarViewFxml implements ControlledFxView {
 
     private GameEventHandler gameEventHandler;
     private GameModel gameModel;
+    private TranslationsController translationsController;
 
     @FXML
     private MenuBar menuBar;
@@ -50,7 +52,9 @@ public class MenuBarViewFxml implements ControlledFxView {
     @FXML
     private MenuItem helpMenuItem;
 
-    private MenuBarViewFxml() {}
+    private MenuBarViewFxml() {
+        translationsController = TranslationsController.getInstance();
+    }
 
     public static MenuBarViewFxml getInstance() {
         if (myself == null) {
@@ -75,8 +79,23 @@ public class MenuBarViewFxml implements ControlledFxView {
     @Override
     public void initialize(EventHandler eventHandler, AbstractModel model) {
         this.createBehaviour();
+        this.changeLanguage();
         this.gameEventHandler = (GameEventHandler) eventHandler;
         this.gameModel = (GameModel) model;
+    }
+
+    private void changeLanguage() {
+        this.fileMenu.setText(translationsController.translate("label.file"));
+        this.newMenuItem.setText(translationsController.translate("label.new"));
+        this.editMenu.setText(translationsController.translate("label.edit"));
+        this.helpMenu.setText(translationsController.translate("label.help"));
+        this.openMenuItem.setText(translationsController.translate("label.open"));
+        this.saveMenuItem.setText(translationsController.translate("label.save"));
+        this.saveAsMenuItem.setText(translationsController.translate("label.saveAs"));
+        this.quitMenuItem.setText(translationsController.translate("label.quit"));
+        this.preferencesMenuItem.setText(translationsController.translate("label.preferences"));
+        this.aboutMenuItem.setText(translationsController.translate("label.about"));
+        this.helpMenuItem.setText(translationsController.translate("label.help"));
     }
 
     private void createBehaviour() {

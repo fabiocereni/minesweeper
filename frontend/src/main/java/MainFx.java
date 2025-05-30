@@ -1,6 +1,9 @@
 
 import Model.GameModel;
+import controller.ControlledFxView;
 import controller.GameController;
+import controller.l10n.TranslationsController;
+import controller.UncontrolledFxView;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,9 +12,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import Interface.AbstractModel;
-import Interface.GameEventHandler;
-import Interface.PlayerEventHandler;
+import Model.AbstractModel;
+import controller.GameEventHandler;
+import controller.PlayerEventHandler;
 import view.*;
 
 import java.util.List;
@@ -26,6 +29,7 @@ public class MainFx extends Application {
     private final UncontrolledFxView userFeedbackView;
     private final GameEventHandler gameEventHandler;
     private final PlayerEventHandler playerEventHandler;
+    private final TranslationsController translationsController;
 
     public MainFx() {
         // GAME MODEL
@@ -40,6 +44,9 @@ public class MainFx extends Application {
         this.gameEventHandler = GameController.getInstance();
         this.playerEventHandler = GameController.getInstance();
 
+        // TRANSLATIONS
+        this.translationsController = TranslationsController.getInstance();
+
         // SCAFFOLDING of M-V-C
         this.menuBarView.initialize(this.gameEventHandler, this.gameModel);
         this.gameBoardView.initialize(this.playerEventHandler, this.gameModel);
@@ -52,8 +59,8 @@ public class MainFx extends Application {
         VBox homeScreen = new VBox(20);
         homeScreen.setAlignment(Pos.CENTER);
 
-        Button newGameButton = new Button("New Game");
-        Button quitButton = new Button("Quit");
+        Button newGameButton = new Button(translationsController.translate("label.newGame"));
+        Button quitButton = new Button(translationsController.translate("label.quit"));
 
         newGameButton.setPrefWidth(200);
         newGameButton.setPrefHeight(30);

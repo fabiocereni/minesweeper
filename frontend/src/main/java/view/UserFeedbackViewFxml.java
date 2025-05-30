@@ -1,7 +1,9 @@
 package view;
 
-import Interface.AbstractModel;
+import Model.AbstractModel;
 import Model.GameModel;
+import controller.l10n.TranslationsController;
+import controller.UncontrolledFxView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,9 +12,6 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class UserFeedbackViewFxml implements UncontrolledFxView {
 
@@ -26,7 +25,11 @@ public class UserFeedbackViewFxml implements UncontrolledFxView {
     @FXML
     private Text userFeedbackBar;
 
-    private UserFeedbackViewFxml() {}
+    private final TranslationsController translationsController;
+
+    private UserFeedbackViewFxml() {
+        this.translationsController = TranslationsController.getInstance();
+    }
 
     public static UserFeedbackViewFxml getInstance() {
         if (myself == null) {
@@ -51,6 +54,11 @@ public class UserFeedbackViewFxml implements UncontrolledFxView {
     @Override
     public void initialize(AbstractModel model) {
         this.gameModel = (GameModel) model;
+        changeLanguage();
+    }
+
+    private void changeLanguage() {
+        this.userFeedbackBar.setText(this.translationsController.translate("label.userFeedback"));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package view;
 
 import business.Grid;
+import controller.l10n.TranslationsController;
 import data.GameSettings;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -12,13 +13,14 @@ public class SettingsView {
 
     private final Stage stage;
     private final Spinner<Integer> bombsSpinner;
+    private final TranslationsController translationsController = TranslationsController.getInstance();
 
     public SettingsView() {
         GameSettings settings = GameSettings.getInstance();
 
-        Label titleLabel = new Label("Impostazioni Partita");
+        Label titleLabel = new Label(translationsController.translate("label.title2Settings"));
 
-        Label bombLabel = new Label("Numero Bombe:");
+        Label bombLabel = new Label(translationsController.translate("label.bombsSettings"));
         bombsSpinner = new Spinner<>();
         bombsSpinner.setEditable(true);
         bombsSpinner.setValueFactory(
@@ -27,7 +29,7 @@ public class SettingsView {
                 )
         );
 
-        Button saveButton = new Button("Salva");
+        Button saveButton = new Button(translationsController.translate("label.buttonSettings"));
         saveButton.setOnAction(event -> saveSettings());
 
         VBox layout = new VBox(10, titleLabel,
@@ -38,7 +40,7 @@ public class SettingsView {
         layout.setStyle("-fx-background-color: #f4f4f4");
 
         this.stage = new Stage();
-        this.stage.setTitle("Impostazioni");
+        this.stage.setTitle(translationsController.translate("label.titleSettings"));
         this.stage.setScene(new Scene(layout));
         this.stage.setResizable(false);
     }
@@ -51,7 +53,7 @@ public class SettingsView {
         settings.save();
 
         // opzionale: feedback
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Impostazioni salvate con successo!");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, translationsController.translate("label.successSettings"));
         alert.showAndWait();
 
         stage.close();

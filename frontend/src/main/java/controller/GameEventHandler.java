@@ -1,4 +1,4 @@
-package Interface;
+package controller;
 
 public interface GameEventHandler extends EventHandler {
 

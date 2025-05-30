@@ -1,17 +1,16 @@
 package Model;
 
-import Interface.AbstractModel;
-import Interface.GameEventHandler;
-import Interface.PlayerEventHandler;
+import controller.GameEventHandler;
+import controller.PlayerEventHandler;
 import application.GameApp;
 import javafx.scene.input.MouseButton;
 import business.Cell;
-import business.GameLogic;
 import view.ConfirmExitPopupFxml;
 
 public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler {
+
     private static GameModel myself;
-    GameApp gameApp;
+    private final GameApp gameApp;
 
     private GameModel(){
         this.gameApp = GameApp.getInstance();

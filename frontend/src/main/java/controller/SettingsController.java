@@ -1,9 +1,8 @@
-package view;
+package controller;
 
 import data.GameSettings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 
 public class SettingsController {
 

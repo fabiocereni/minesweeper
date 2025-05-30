@@ -1,5 +1,6 @@
 package view;
 
+import controller.l10n.TranslationsController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,14 +13,17 @@ import javafx.stage.StageStyle;
 public class ConfirmExitPopupFxml {
 
     public static void showConfirmExit() {
+
+        TranslationsController translationsController = TranslationsController.getInstance();
+
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initStyle(StageStyle.UTILITY); // finestra semplice
 
-        Label message = new Label("Vuoi uscire dal gioco?");
+        Label message = new Label(TranslationsController.getInstance().translate("label.titleQuit"));
 
-        Button yesButton = new Button("Sì");
-        Button noButton = new Button("No");
+        Button yesButton = new Button(translationsController.translate("label.buttonYesQuit"));
+        Button noButton = new Button(translationsController.translate("label.buttonNoQuit"));
 
         yesButton.setOnAction(e -> {
             System.exit(0); // Chiude completamente il programma
