@@ -1,5 +1,6 @@
 package ch.supsi.mineweeper.backend.data;
 
+import ch.supsi.mineweeper.backend.business.i18n.IGameSettingsData;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -7,26 +8,26 @@ import java.io.File;
 import java.io.IOException;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GameSettings {
+public class GameSettingsData implements IGameSettingsData {
 
     private static final String SETTINGS_FILE = "minesweeper_settings.json";
 
     private static final int DEFAULT_BOMBS = 10;
-    private static final String DEFAULT_LANGUAGE = "en-US";
+    private static final String DEFAULT_LANGUAGE = "it-CH";
     private static final int MIN_BOMBS = 1;
     private static final int MAX_BOMBS = 80;
     private int numBombs;
     private String language;
 
-    private static GameSettings instance;
+    private static GameSettingsData instance;
 
     // Costruttore richiesto da Jackson e fallback
-    public GameSettings() {
+    public GameSettingsData() {
         this.numBombs = DEFAULT_BOMBS;
         this.language = DEFAULT_LANGUAGE;
     }
 
-    public static GameSettings getInstance() {
+    public static GameSettingsData getInstance() {
         if (instance == null) {
             instance = load();
         }
@@ -41,18 +42,12 @@ public class GameSettings {
         }
     }
 
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String languageTag) {
-        this.language = languageTag;
-    }
-
+    @Override
     public int getNumBombs() {
         return numBombs;
     }
 
+    @Override
     public void setNumBombs(int numBombs) {
         if (numBombs < MIN_BOMBS) {
             this.numBombs = DEFAULT_BOMBS;
@@ -61,6 +56,16 @@ public class GameSettings {
         } else {
             this.numBombs = numBombs;
         }
+    }
+
+    @Override
+    public String getLanguageTag() {
+        return language;
+    }
+
+    @Override
+    public void setLanguageTag(String languageTag) {
+        this.language = languageTag;
     }
 
     public boolean save() {
@@ -74,18 +79,19 @@ public class GameSettings {
         }
     }
 
-    private static GameSettings load() {
+    private static GameSettingsData load() {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File(SETTINGS_FILE);
 
         if (file.exists()) {
             try {
-                return mapper.readValue(file, GameSettings.class);
+                return mapper.readValue(file, GameSettingsData.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        return new GameSettings();
+        return new GameSettingsData();
     }
+
 }

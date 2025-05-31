@@ -1,6 +1,7 @@
 package ch.supsi.mineweeper.backend.business.i18n;
 
 import ch.supsi.mineweeper.backend.application.i18n.ITranslationsLogic;
+import ch.supsi.mineweeper.backend.data.GameSettingsData;
 import ch.supsi.mineweeper.backend.data.i18n.TranslationsPropertiesDataAccess;
 
 import java.util.List;
@@ -13,13 +14,15 @@ public class TranslationsLogic implements ITranslationsLogic {
 
     private final ITranslationsDataAccess translationsDao;
 
-    private final List<String> supportedLanguageTags;
-
     private Properties translations;
+
+
+    private final IGameSettingsData settings;
 
     public TranslationsLogic() {
         this.translationsDao = TranslationsPropertiesDataAccess.getInstance();
-        this.supportedLanguageTags = translationsDao.getSupportedLanguageTags();
+
+        this.settings = GameSettingsData.getInstance();
     }
 
     public static TranslationsLogic getInstance() {
@@ -30,17 +33,8 @@ public class TranslationsLogic implements ITranslationsLogic {
     }
 
     @Override
-    public boolean isSupportedLanguageTag(String languageTag) {
-        if (!this.supportedLanguageTags.contains(languageTag)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean changeLanguage(String languageTag) {
+    public void changeLanguage(String languageTag) {
         this.translations = translationsDao.getTranslations(Locale.forLanguageTag(languageTag));
-        return this.translations != null;
     }
 
     @Override
@@ -50,17 +44,17 @@ public class TranslationsLogic implements ITranslationsLogic {
 
     @Override
     public List<String> getSupportedLanguageTags() {
-        return getSupportedLanguageTags();
+        return translationsDao.getSupportedLanguageTags();
     }
 
     @Override
     public String getLanguage() {
-        return translationsDao.getLanguage();
+        return settings.getLanguageTag();
     }
 
     @Override
     public void setLanguage(String languageTag) {
-        translationsDao.setLanguage(languageTag);
+        settings.setLanguageTag(languageTag);
     }
 
 

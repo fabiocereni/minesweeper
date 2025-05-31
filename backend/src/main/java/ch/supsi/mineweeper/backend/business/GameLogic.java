@@ -1,6 +1,6 @@
     package ch.supsi.mineweeper.backend.business;
 
-    import ch.supsi.mineweeper.backend.data.GameSettings;
+    import ch.supsi.mineweeper.backend.data.GameSettingsData;
     import javafx.scene.input.MouseButton;
 
     import java.util.LinkedList;
@@ -23,7 +23,7 @@
 
         private GameLogic() {
             counter = 0;
-            int bombs = GameSettings.getInstance().getNumBombs();
+            int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             grid.disableButtons();
         }
@@ -46,7 +46,7 @@
 
         public void newGame() {
             counter = 0;
-            int bombs = GameSettings.getInstance().getNumBombs();
+            int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             grid.activateButtons();
         }

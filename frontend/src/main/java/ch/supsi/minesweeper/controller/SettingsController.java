@@ -1,26 +1,32 @@
 package ch.supsi.minesweeper.controller;
 
-import ch.supsi.mineweeper.backend.data.GameSettings;
+import ch.supsi.mineweeper.backend.data.GameSettingsData;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 
 public class SettingsController {
 
 
-    @FXML private Spinner<Integer> bombsSpinner;
+    @FXML
+    private Spinner<Integer> bombsSpinner;
+
+    @FXML
+    private ComboBox<String> supportedLanguages;
 
     @FXML
     public void initialize() {
-        GameSettings settings = GameSettings.getInstance();
-
+        GameSettingsData settings = GameSettingsData.getInstance();
     }
 
     @FXML
     public void handleSave() {
         int bombs = bombsSpinner.getValue();
 
-        GameSettings settings = GameSettings.getInstance();
+        GameSettingsData settings = GameSettingsData.getInstance();
         settings.setNumBombs(bombs);
         settings.save();
     }
+
+
 }

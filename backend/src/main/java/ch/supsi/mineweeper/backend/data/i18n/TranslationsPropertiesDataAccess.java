@@ -1,8 +1,6 @@
 package ch.supsi.mineweeper.backend.data.i18n;
 
-import ch.supsi.mineweeper.backend.business.i18n.ISetLanguage;
 import ch.supsi.mineweeper.backend.business.i18n.ITranslationsDataAccess;
-import ch.supsi.mineweeper.backend.business.i18n.SetLanguage;
 
 import java.util.*;
 
@@ -13,12 +11,8 @@ public class TranslationsPropertiesDataAccess implements ITranslationsDataAccess
     private static final String translationsResourceBundlePath = "i18n.labels";
     private static final String supportedLanguagesPath = "/supported-languages.properties";
     private static TranslationsPropertiesDataAccess myself;
-    private final ISetLanguage iSetLanguage;
 
-
-    private TranslationsPropertiesDataAccess() {
-        this.iSetLanguage = SetLanguage.getInstance();
-    }
+    private TranslationsPropertiesDataAccess() { }
 
     public static TranslationsPropertiesDataAccess getInstance() {
         if (myself == null) {
@@ -80,16 +74,6 @@ public class TranslationsPropertiesDataAccess implements ITranslationsDataAccess
         }
 
         return translations;
-    }
-
-    @Override
-    public String getLanguage() {
-        return iSetLanguage.getLanguage();
-    }
-
-    @Override
-    public void setLanguage(String languageTag) {
-        iSetLanguage.setLanguage(languageTag);
     }
 
 }

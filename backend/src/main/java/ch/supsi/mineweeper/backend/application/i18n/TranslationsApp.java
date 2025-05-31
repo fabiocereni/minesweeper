@@ -37,4 +37,8 @@ public class TranslationsApp {
         translationsLogic.setLanguage(languageTag);
     }
 
+    public String getCurrentLanguage() {
+        return translationsLogic.getLanguage();
+    }
+
 }

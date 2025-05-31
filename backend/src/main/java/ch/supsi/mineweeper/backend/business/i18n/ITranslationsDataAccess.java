@@ -10,7 +10,4 @@ public interface ITranslationsDataAccess {
 
     Properties getTranslations(Locale locale);
 
-    String getLanguage();
-
-    void setLanguage(String languageTag);
 }

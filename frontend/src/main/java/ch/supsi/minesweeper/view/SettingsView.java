@@ -2,7 +2,7 @@ package ch.supsi.minesweeper.view;
 
 import ch.supsi.mineweeper.backend.business.Grid;
 import ch.supsi.minesweeper.controller.l10n.TranslationsController;
-import ch.supsi.mineweeper.backend.data.GameSettings;
+import ch.supsi.mineweeper.backend.data.GameSettingsData;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,7 +19,7 @@ public class SettingsView {
     private final TranslationsController translationsController = TranslationsController.getInstance();
 
     public SettingsView() {
-        GameSettings settings = GameSettings.getInstance();
+        GameSettingsData settings = GameSettingsData.getInstance();
 
         Label titleLabel = new Label(translationsController.translate("label.title2Settings"));
 
@@ -43,7 +43,7 @@ public class SettingsView {
 
         VBox layout = new VBox(10, titleLabel,
                 new HBox(10, bombLabel, bombsSpinner),
-                new HBox(10, languageLabel, languageComboBox), // Aggiungi il ComboBox con l'etichetta
+                new HBox(10, languageLabel, languageComboBox),
                 saveButton
         );
 
@@ -60,7 +60,7 @@ public class SettingsView {
         int bombs = bombsSpinner.getValue();
         String languageTag = languageComboBox.getValue();
 
-        GameSettings settings = GameSettings.getInstance();
+        GameSettingsData settings = GameSettingsData.getInstance();
         settings.setNumBombs(bombs);
         translationsController.setLanguage(languageTag);
         settings.save();

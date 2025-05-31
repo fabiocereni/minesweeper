@@ -25,7 +25,9 @@ public class TranslationsController {
     }
 
     public List<String> getSupportedLanguageTags() {
-        return this.translationsApp.getSupportedLanguageTags(); // DICE CHE C'È UN STACKOVERFLOW
+        List<String> tags = this.translationsApp.getSupportedLanguageTags();
+        System.out.println(tags == null ? "null" : tags.toString());
+        return this.translationsApp.getSupportedLanguageTags();
     }
 
     public void setLanguage(String languageTag) {
