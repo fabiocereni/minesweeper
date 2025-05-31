@@ -38,7 +38,7 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>17.0.14</version>
-            <classifier>mac</classifier>
+            <classifier>mac-aarch64</classifier>
             <scope>compile</scope>
         </dependency>
 
@@ -58,7 +58,7 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>17.0.14</version>
-            <classifier>mac</classifier>
+            <classifier>mac-aarch64</classifier>
         </dependency>
     </dependencies>
     <build>

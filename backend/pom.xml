@@ -37,7 +37,7 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>17.0.14</version>
-            <classifier>mac</classifier>
+            <classifier>mac-aarch64</classifier>
             <scope>compile</scope>
         </dependency>
     </dependencies>
