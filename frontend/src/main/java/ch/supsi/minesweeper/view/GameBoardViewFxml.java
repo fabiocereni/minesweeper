@@ -21,23 +21,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import static java.lang.Thread.sleep;
-
-
 public class GameBoardViewFxml implements ControlledFxView {
-
     private static GameBoardViewFxml myself;
     private PlayerEventHandler playerEventHandler;
     private GameModel gameModel;
     private GameController gameController;
     private Button[][] buttonMatrix = new Button[9][9];
-
     @FXML
     private GridPane containerPane;
-    
-    private GameBoardViewFxml() { }
-
+    private GameBoardViewFxml() {}
     public static GameBoardViewFxml getInstance() {
         if (myself == null) {
             myself = new GameBoardViewFxml();
@@ -48,25 +40,56 @@ public class GameBoardViewFxml implements ControlledFxView {
                     fxmlLoader.setController(myself);
                     fxmlLoader.load();
                 }
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         return myself;
     }
-
     @Override
     public void initialize(EventHandler eventHandler, AbstractModel model) {
         this.playerEventHandler = (PlayerEventHandler) eventHandler;
         this.gameModel = (GameModel) model;
-
         createButton();
-
         this.createBehaviour();
         this.disableButtons();
     }
-
+    @Override
+    public Node getNode() {
+        return this.containerPane;
+    }
+    @Override
+    public void update(String sentence) {
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                Button btn = buttonMatrix[x][y];
+                if(gameModel.getState(x,y)){
+                    btn.setDisable(false);
+                }
+                if (gameModel.isFlag(x,y)) {
+                    btn.setText("\uD83D\uDEA9");
+                    btn.setStyle("-fx-background-color: yellow;");
+                } else if (gameModel.isClicked(x,y)) {
+                    if (gameModel.isAbomb(x,y)) {
+                        btn.setText("\uD83D\uDCA3");
+                        btn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                        createDelayedDisabling();
+                    } else {
+                        int near = gameModel.getNearBombs(x,y);
+                        btn.setText(near > 0 ? String.valueOf(near) : "");
+                        btn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                    }
+                } else {
+                    btn.setText("");
+                    btn.setStyle("");
+                }
+            }
+        }
+        // feedback bar
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        Date date = new Date(System.currentTimeMillis());
+        System.out.println(this.getClass().getSimpleName() + " updated..." + dateFormat.format(date));
+    }
     private void createButton() {
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
@@ -85,23 +108,17 @@ public class GameBoardViewFxml implements ControlledFxView {
             }
         }
     }
-
     private void createBehaviour() {
-        // add event handlers for all necessary buttons
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
-                //buttonMatrix[y][x].setOnAction(event -> this.playerEventHandler.move());
                 int fy = y;
                 int fx = x;
                 buttonMatrix[y][x].setOnMouseClicked(event -> {
                     click(fy, fx, event.getButton());
                 });
-
             }
         }
     }
-
-    //
     private void click(int row, int col, MouseButton button) {
         if (button == MouseButton.SECONDARY) {
             playerEventHandler.clickRight(row,col);
@@ -109,65 +126,11 @@ public class GameBoardViewFxml implements ControlledFxView {
             playerEventHandler.clickLeft(row, col);
         }
     }
-
-    @Override
-    public Node getNode() {
-        return this.containerPane;
-    }
-
-
-    @Override
-    public void update(String sentence) {
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
-                Button btn = buttonMatrix[x][y];
-
-
-                if(gameModel.getState(x,y)){
-                    btn.setDisable(false);
-                }
-
-                if (gameModel.isFlag(x,y)) {
-                    btn.setText("\uD83D\uDEA9");
-                    btn.setStyle("-fx-background-color: yellow;");
-                } else if (gameModel.isClicked(x,y)) {
-                    if (gameModel.isAbomb(x,y)) {
-                        btn.setText("\uD83D\uDCA3");
-                        btn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                        createDelayedDisabling();
-                    } else {
-                        int near = gameModel.getNearBombs(x,y);
-                        btn.setText(near > 0 ? String.valueOf(near) : "");
-                        btn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                    }
-                } else {
-                    btn.setText(""); // non cliccata e non flag = vuota
-                    btn.setStyle(""); // reset stile
-                }
-            }
-        }
-
-        // feedback bar
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date date = new Date(System.currentTimeMillis());
-        System.out.println(this.getClass().getSimpleName() + " updated..." + dateFormat.format(date));
-    }
-
     private void createDelayedDisabling() {
         PauseTransition pause = new PauseTransition(javafx.util.Duration.seconds(1));
         pause.setOnFinished(event -> disableButtons());
         pause.play();
     }
-
-
-    public void activateButtons(){
-        for (int y=0; y<9; y++){
-            for (int x=0; x<9 ; x++){
-                buttonMatrix[y][x].setDisable(false);
-            }
-        }
-    }
-
     public void disableButtons(){
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
@@ -175,6 +138,11 @@ public class GameBoardViewFxml implements ControlledFxView {
             }
         }
     }
-
-
+    public void activateButtons(){
+        for (int y=0; y<9; y++){
+            for (int x=0; x<9 ; x++){
+                buttonMatrix[y][x].setDisable(false);
+            }
+        }
+    }
 }

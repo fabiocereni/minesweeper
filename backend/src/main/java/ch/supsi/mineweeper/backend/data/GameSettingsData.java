@@ -9,31 +9,25 @@ import java.io.IOException;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameSettingsData implements IGameSettingsData {
-
     private static final String SETTINGS_FILE = "minesweeper_settings.json";
-
     private static final int DEFAULT_BOMBS = 10;
     private static final String DEFAULT_LANGUAGE = "it-CH";
     private static final int MIN_BOMBS = 1;
     private static final int MAX_BOMBS = 80;
     private int numBombs;
     private String language;
-
     private static GameSettingsData instance;
-
     // Costruttore richiesto da Jackson e fallback
     public GameSettingsData() {
         this.numBombs = DEFAULT_BOMBS;
         this.language = DEFAULT_LANGUAGE;
     }
-
     public static GameSettingsData getInstance() {
         if (instance == null) {
             instance = load();
         }
         return instance;
     }
-
     public static void deleteSettingsFile() {
         File file = new File(SETTINGS_FILE);
         if (file.exists()) {
@@ -41,12 +35,10 @@ public class GameSettingsData implements IGameSettingsData {
             System.out.println("File impostazioni eliminato.");
         }
     }
-
     @Override
     public int getNumBombs() {
         return numBombs;
     }
-
     @Override
     public void setNumBombs(int numBombs) {
         if (numBombs < MIN_BOMBS) {
@@ -57,17 +49,14 @@ public class GameSettingsData implements IGameSettingsData {
             this.numBombs = numBombs;
         }
     }
-
     @Override
     public String getLanguageTag() {
         return language;
     }
-
     @Override
     public void setLanguageTag(String languageTag) {
         this.language = languageTag;
     }
-
     public boolean save() {
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -78,11 +67,9 @@ public class GameSettingsData implements IGameSettingsData {
             return false;
         }
     }
-
     private static GameSettingsData load() {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File(SETTINGS_FILE);
-
         if (file.exists()) {
             try {
                 return mapper.readValue(file, GameSettingsData.class);
@@ -90,8 +77,6 @@ public class GameSettingsData implements IGameSettingsData {
                 e.printStackTrace();
             }
         }
-
         return new GameSettingsData();
     }
-
 }

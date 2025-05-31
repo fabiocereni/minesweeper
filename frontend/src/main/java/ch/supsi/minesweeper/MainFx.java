@@ -21,9 +21,7 @@ import ch.supsi.minesweeper.view.*;
 import java.util.List;
 
 public class MainFx extends Application {
-
     public static final String APP_TITLE = "mine sweeper";
-
     private final AbstractModel gameModel;
     private final ControlledFxView menuBarView;
     private final ControlledFxView gameBoardView;

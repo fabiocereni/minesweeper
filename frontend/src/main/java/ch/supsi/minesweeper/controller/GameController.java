@@ -6,24 +6,20 @@ import ch.supsi.minesweeper.view.DataView;
 import java.util.List;
 
 public class GameController implements GameEventHandler, PlayerEventHandler {
-
     private static GameController myself;
     private GameModel gameModel;
     private List<DataView> views;
     private final TranslationsController translationsController;
-
     private GameController () {
         this.gameModel = GameModel.getInstance();
         this.translationsController = TranslationsController.getInstance();
     }
-
     public static GameController getInstance() {
         if (myself == null) {
             myself = new GameController();
         }
         return myself;
     }
-
     public void initialize(List<DataView> views) {
         this.views = views;
     }
@@ -33,7 +29,6 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         gameModel.newGame();
         views.forEach(dataView -> dataView.update(translationsController.translate("label.infoBombs") + ": " + gameModel.numberOfBombs() + " - " +  translationsController.translate("label.infoFlags") + " : " + gameModel.numberOfFlagRemaining()));
     }
-
     @Override
     public void save() {
         // BISOGNA AGGIUNGERE IL SALVATAGGIO
@@ -48,7 +43,6 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         gameModel.clickRight(row, col);
         views.forEach(dataView -> dataView.update(""));
     }
-
     @Override
     public void clickLeft(int row, int col) {
         gameModel.clickLeft(row, col);
@@ -64,11 +58,9 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     public void about() {
         views.forEach(dataView -> dataView.update(translationsController.translate("label.infoAbout")));
     }
-
     @Override
     public void help() {
         views.forEach(dataView -> dataView.update(translationsController.translate("label.infoHelp") + " \uD83D\uDCA3"));
     }
-
 
 }

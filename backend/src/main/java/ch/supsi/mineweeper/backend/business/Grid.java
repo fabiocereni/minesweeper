@@ -31,7 +31,6 @@ public class Grid {
         }
         setNumbers();
     }
-
     private void setNumbers(){
         for(int y = 0; y<size;y++){
             for (int x = 0; x < size; x++) {
@@ -52,23 +51,18 @@ public class Grid {
             }
         }
     }
-
     public Cell getCell(int x, int y){
         return grid[x][y];
     }
-
     public int getNumFlags(){
         return numFlags;
     }
-
     public void incrementNumFlags(){
         numFlags++;
     }
-
     public void decrementNumFlags(){
         numFlags--;
     }
-
     public void activateButtons(){
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
@@ -76,7 +70,6 @@ public class Grid {
             }
         }
     }
-
     public void disableButtons(){
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
@@ -84,7 +77,6 @@ public class Grid {
             }
         }
     }
-
     public void showAll() {
         for(int y = 0; y<size; y++){
             for (int x = 0; x < size; x++) {
@@ -95,7 +87,6 @@ public class Grid {
             }
         }
     }
-
     public int getNumberBombs() {
         return numberBombs;
     }

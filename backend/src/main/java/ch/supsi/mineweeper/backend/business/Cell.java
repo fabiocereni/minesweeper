@@ -1,21 +1,17 @@
 package ch.supsi.mineweeper.backend.business;
 
 public sealed abstract class Cell permits NormalCell, BombCell{
-
     private boolean clicked;
     private boolean isFlag;
     private boolean state;
-
     public Cell() {
         this.clicked = false;
         this.isFlag = false;
         this.state = false;
     }
-
     public abstract boolean isaBomb();
     public abstract boolean isExpandable();
     public abstract int getNearBombs();
-
     public boolean isFlag() {
         return isFlag;
     }

@@ -1,4 +1,3 @@
 package ch.supsi.minesweeper.controller;
 
-public interface EventHandler {
-}
+public interface EventHandler {}

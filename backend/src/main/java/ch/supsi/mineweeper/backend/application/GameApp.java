@@ -1,17 +1,13 @@
 package ch.supsi.mineweeper.backend.application;
 
-import ch.supsi.mineweeper.backend.business.Cell;
 import ch.supsi.mineweeper.backend.business.GameLogic;
 
 public class GameApp {
-
     private static GameApp myself;
     private GameLogic gameLogic;
-
     private GameApp() {
         this.gameLogic = GameLogic.getInstance();
     }
-
     public static GameApp getInstance() {
         if (myself == null) {
             myself = new GameApp();
@@ -36,27 +32,20 @@ public class GameApp {
     public int numberOfBombs() {
         return gameLogic.numberOfBombs();
     }
-    public boolean isGameWon(){return gameLogic.isGameWon();};
-    public boolean isGameLost(){return gameLogic.isGameLost();};
-
-
-
+    public boolean isGameWon(){return gameLogic.isGameWon();}
+    public boolean isGameLost(){return gameLogic.isGameLost();}
     public boolean isFlag(int row, int col) {
         return gameLogic.isFlag(row, col);
     }
-
     public boolean isAbomb(int row, int col) {
         return gameLogic.isAbomb(row, col);
     }
-
     public boolean isClicked(int row, int col) {
         return gameLogic.isClicked(row, col);
     }
-
     public int getNearBombs(int row, int col) {
         return gameLogic.getNearBombs(row, col);
     }
-
     public boolean getState(int row, int col) {
         return gameLogic.getState(row, col);
     }
