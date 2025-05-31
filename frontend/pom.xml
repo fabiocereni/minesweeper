@@ -34,6 +34,13 @@
             <classifier>linux</classifier>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.14</version>
+            <classifier>mac</classifier>
+            <scope>compile</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -46,6 +53,12 @@
             <artifactId>javafx-fxml</artifactId>
             <version>17.0.14</version>
             <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.14</version>
+            <classifier>mac</classifier>
         </dependency>
     </dependencies>
     <build>
