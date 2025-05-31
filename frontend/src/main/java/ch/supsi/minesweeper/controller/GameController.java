@@ -3,7 +3,6 @@ package ch.supsi.minesweeper.controller;
 
 import ch.supsi.minesweeper.Model.GameModel;
 import ch.supsi.minesweeper.controller.l10n.TranslationsController;
-import javafx.scene.input.MouseButton;
 import ch.supsi.minesweeper.view.DataView;
 
 import java.util.List;
@@ -69,25 +68,21 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     }
 
     @Override
-    public int handleClick(int row, int col, MouseButton button) {
+    public void clickRight(int row, int col) {
+        gameModel.clickRight(row, col);
+        views.forEach(dataView -> dataView.update(""));
+    }
 
-        switch (gameModel.handleClick(row, col, button)){
-            case -1:
-                views.forEach(dataView -> dataView.update(translationsController.translate("label.lost")));
-                break;
-            case 0:
-                views.forEach(dataView -> dataView.update(translationsController.translate("label.infoBombs") + ": " + gameModel.numberOfBombs() + " - " +  translationsController.translate("label.infoFlags") + " : " + gameModel.numberOfFlagRemaining()));
-                break;
-            case 1:
-                views.forEach(dataView -> dataView.update(translationsController.translate("label.win")));
-                break;
-            default:
-                views.forEach(dataView -> dataView.update(""));
-                break;
+    @Override
+    public void clickLeft(int row, int col) {
+        gameModel.clickLeft(row, col);
+        if(gameModel.isGameWon()){
+            views.forEach(dataView -> dataView.update(translationsController.translate("label.win")));
+        }else if(gameModel.isGameLost()){
+            views.forEach(dataView -> dataView.update(translationsController.translate("label.lost")));
+        }else{
+            views.forEach(dataView -> dataView.update(""));
         }
-
-
-        return 0;
     }
 
     @Override

@@ -1,8 +1,5 @@
     package ch.supsi.mineweeper.backend.business;
-
     import ch.supsi.mineweeper.backend.data.GameSettingsData;
-    import javafx.scene.input.MouseButton;
-
     import java.util.LinkedList;
     import java.util.Queue;
 
@@ -79,40 +76,41 @@
             }
         }
 
-        public int handleClick(int row, int col, MouseButton button) {
-            if (button == MouseButton.SECONDARY) {
-                toggleFlag(row, col);
-            } else if (button == MouseButton.PRIMARY) {
-                return selectCell(row, col);
-            }
-            return 0;
-        }
-
-        public int selectCell(int row, int col) {
+        public void selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if(!cell.isFlag()) {
                 cell.setClicked(true);
-                if (cell.isaBomb()) {
-                    //VictoryPopupFxml.showVictory();
-                    //ErrorClickedBombFxml.showError();
-                    grid.showAll();
-                    //grid.defaultGrid();
-                    grid.disableButtons();
-                    System.out.println("hai perso");
-                    return -1;
-                }
                 if (cell.isExpandable()) {
                     revealEmptyCells(row, col);
                 }
-                if (grid.getNumberOfOpenCell() == ((Grid.size * Grid.size) - grid.getNumberBombs())) {
-                    System.out.println("vittoria");
-                    grid.showAll();
-                    grid.disableButtons();
-                    return 1;
+            }
+        }
+
+        public boolean isGameWon(){
+            if (grid.getNumberOfOpenCell() == ((Grid.size * Grid.size) - grid.getNumberBombs())) {
+                System.out.println("vittoria");
+                grid.showAll();
+                grid.disableButtons();
+                return true;
+            }else{
+                return false;
+            }
+        };
+        public boolean isGameLost(){
+            for(int y = 0; y < Grid.size;y++) {
+                for (int x = 0; x < Grid.size;x++) {
+                    if(grid.getCell(x,y).isClicked()&&grid.getCell(x,y).isaBomb()){
+                        grid.showAll();
+                        grid.disableButtons();
+                        System.out.println("hai perso");
+                        return true;
+                    }
                 }
             }
-            return 0;
-        }
+            return false;
+        };
+
+
 
 
         public boolean isFlagged(int row, int col) {

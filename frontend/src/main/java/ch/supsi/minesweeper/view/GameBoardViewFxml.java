@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
@@ -95,10 +96,19 @@ public class GameBoardViewFxml implements ControlledFxView {
                 int fy = y;
                 int fx = x;
                 buttonMatrix[y][x].setOnMouseClicked(event -> {
-                    playerEventHandler.handleClick(fy, fx, event.getButton());
+                    click(fy, fx, event.getButton());
                 });
 
             }
+        }
+    }
+
+    //
+    private void click(int row, int col, MouseButton button) {
+        if (button == MouseButton.SECONDARY) {
+            playerEventHandler.clickRight(row,col);
+        } else if (button == MouseButton.PRIMARY) {
+            playerEventHandler.clickLeft(row, col);
         }
     }
 
@@ -106,7 +116,6 @@ public class GameBoardViewFxml implements ControlledFxView {
     public Node getNode() {
         return this.containerPane;
     }
-
 
 
     @Override

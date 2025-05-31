@@ -1,6 +1,4 @@
 package ch.supsi.minesweeper.controller;
-
-import javafx.scene.input.MouseButton;
 public interface PlayerEventHandler extends EventHandler {
 
     void move();
@@ -13,6 +11,6 @@ public interface PlayerEventHandler extends EventHandler {
     void toggleFlag(int row, int col);
 
     void selectCell(int row, int col);
-
-    int handleClick(int row, int col, MouseButton button);
+    void clickRight(int row, int col);
+    void clickLeft(int row, int col);
 }

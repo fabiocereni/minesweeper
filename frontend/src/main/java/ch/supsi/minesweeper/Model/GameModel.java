@@ -3,7 +3,6 @@ package ch.supsi.minesweeper.Model;
 import ch.supsi.minesweeper.controller.GameEventHandler;
 import ch.supsi.minesweeper.controller.PlayerEventHandler;
 import ch.supsi.mineweeper.backend.application.GameApp;
-import javafx.scene.input.MouseButton;
 import ch.supsi.mineweeper.backend.business.Cell;
 import ch.supsi.minesweeper.view.ConfirmExitPopupFxml;
 
@@ -58,10 +57,24 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
         gameApp.selectCell(row,col);
     }
 
+
+
+
     @Override
-    public int handleClick(int row, int col, MouseButton button) {
-        return gameApp.handleClick(row,col,button);
+    public void clickRight(int row, int col) {
+        toggleFlag(row,col);
     }
+
+    @Override
+    public void clickLeft(int row, int col) {
+        selectCell(row, col);
+    }
+
+    public boolean isGameWon(){return gameApp.isGameWon();};
+    public boolean isGameLost(){return gameApp.isGameLost();};
+
+
+
     public Cell getCell(int x, int y){
         return gameApp.getCell(x,y);
     }

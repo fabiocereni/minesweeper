@@ -2,7 +2,6 @@ package ch.supsi.mineweeper.backend.application;
 
 import ch.supsi.mineweeper.backend.business.Cell;
 import ch.supsi.mineweeper.backend.business.GameLogic;
-import javafx.scene.input.MouseButton;
 
 public class GameApp {
 
@@ -44,10 +43,6 @@ public class GameApp {
         gameLogic.selectCell(row,col);
     }
 
-    public int handleClick(int row, int col, MouseButton button) {
-        return gameLogic.handleClick(row,col,button);
-    }
-
     public Cell getCell(int x, int y){
         return gameLogic.getCell(x,y);
     }
@@ -63,4 +58,9 @@ public class GameApp {
     public int numberOfBombs() {
         return gameLogic.numberOfBombs();
     }
+
+
+    public boolean isGameWon(){return gameLogic.isGameWon();};
+    public boolean isGameLost(){return gameLogic.isGameLost();};
+
 }
