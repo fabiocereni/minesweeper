@@ -1,10 +1,8 @@
 package ch.supsi.minesweeper.controller;
 
-
 import ch.supsi.minesweeper.Model.GameModel;
 import ch.supsi.minesweeper.controller.l10n.TranslationsController;
 import ch.supsi.minesweeper.view.DataView;
-
 import java.util.List;
 
 public class GameController implements GameEventHandler, PlayerEventHandler {
@@ -41,32 +39,10 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         // BISOGNA AGGIUNGERE IL SALVATAGGIO
         this.views.forEach(dataView -> dataView.update("Saved"));
     }
-
     @Override
     public void quit() {
         gameModel.quit();
     }
-
-    @Override
-    public void move() {
-        gameModel.move();
-    }
-
-    @Override
-    public void openCell(int row, int col) {
-        gameModel.openCell(row, col);
-    }
-
-    @Override
-    public void toggleFlag(int row, int col) {
-        gameModel.toggleFlag(row, col);
-    }
-
-    @Override
-    public void selectCell(int row, int col) {
-        gameModel.selectCell(row, col);
-    }
-
     @Override
     public void clickRight(int row, int col) {
         gameModel.clickRight(row, col);
@@ -76,21 +52,14 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void clickLeft(int row, int col) {
         gameModel.clickLeft(row, col);
-        if(gameModel.isGameWon()){
-            views.forEach(dataView -> dataView.update(translationsController.translate("label.win")));
-        }else if(gameModel.isGameLost()){
+        if(gameModel.isGameLost()){
             views.forEach(dataView -> dataView.update(translationsController.translate("label.lost")));
+        }else if(gameModel.isGameWon()){
+            views.forEach(dataView -> dataView.update(translationsController.translate("label.win")));
         }else{
             views.forEach(dataView -> dataView.update(""));
         }
     }
-
-    @Override
-    public void revealEmptyCells(int startRow, int startCol){
-        gameModel.revealEmptyCells(startRow, startCol);
-        views.forEach(dataView -> dataView.update(""));
-    }
-
     @Override
     public void about() {
         views.forEach(dataView -> dataView.update(translationsController.translate("label.infoAbout")));

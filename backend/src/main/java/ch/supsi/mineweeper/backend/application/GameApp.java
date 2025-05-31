@@ -18,49 +18,47 @@ public class GameApp {
         }
         return myself;
     }
-
     public void newGame() {
         gameLogic.newGame();
     }
-
     public void save() {
         gameLogic.save();
     }
-
-    public void move() {
-        gameLogic.move();
-    }
-
-    public void openCell(int row, int col) {
-        gameLogic.openCell(row,col);
-    }
-
     public void toggleFlag(int row, int col) {
         gameLogic.toggleFlag(row,col);
     }
-
     public void selectCell(int row, int col) {
         gameLogic.selectCell(row,col);
     }
-
-    public Cell getCell(int x, int y){
-        return gameLogic.getCell(x,y);
-    }
-
     public int numberOfFlagRemaining(){
         return gameLogic.numberOfFlagRemaining();
     }
-
-    public void revealEmptyCells(int startRow, int startCol){
-        gameLogic.revealEmptyCells(startRow,startCol);
-    }
-
     public int numberOfBombs() {
         return gameLogic.numberOfBombs();
     }
-
-
     public boolean isGameWon(){return gameLogic.isGameWon();};
     public boolean isGameLost(){return gameLogic.isGameLost();};
+
+
+
+    public boolean isFlag(int row, int col) {
+        return gameLogic.isFlag(row, col);
+    }
+
+    public boolean isAbomb(int row, int col) {
+        return gameLogic.isAbomb(row, col);
+    }
+
+    public boolean isClicked(int row, int col) {
+        return gameLogic.isClicked(row, col);
+    }
+
+    public int getNearBombs(int row, int col) {
+        return gameLogic.getNearBombs(row, col);
+    }
+
+    public boolean getState(int row, int col) {
+        return gameLogic.getState(row, col);
+    }
 
 }

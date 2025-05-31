@@ -8,8 +8,6 @@ public interface GameEventHandler extends EventHandler {
 
     void quit();
 
-    void revealEmptyCells(int startRow, int startCol);
-
     void about();
 
     void help();

@@ -8,58 +8,26 @@
         private static GameLogic myself;
         private int counter;
         private Grid grid;
-
-        /*
-        private GameLogic() {
-            counter = 0;
-            grid = new Grid();
-            grid.disableButtons();
-        }
-
-         */
-
         private GameLogic() {
             counter = 0;
             int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             grid.disableButtons();
         }
-
-
         public static GameLogic getInstance() {
             if (myself == null) {
                 myself = new GameLogic();
             }
             return myself;
         }
-
-        /*
-        public void newGame() {
-            counter = 0;
-            grid = new Grid();
-            grid.activateButtons();
-        }
-         */
-
         public void newGame() {
             counter = 0;
             int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             grid.activateButtons();
         }
-
-
         public void save() {
         }
-
-        public void move() {
-            counter++;
-        }
-
-        public void openCell(int row, int col) {
-
-        }
-
         public void toggleFlag(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if (!cell.isClicked()) { // opzionale: evita di flaggare celle già aperte
@@ -109,40 +77,52 @@
             }
             return false;
         };
-
-
-
-
         public boolean isFlagged(int row, int col) {
             return grid.getCell(row, col).isFlag();
         }
-
         public int numberOfFlaggedCells() {
             return grid.getNumFlags();
         }
         public int numberOfFlagRemaining(){
             return grid.getNumberBombs()-grid.getNumFlags();
         }
-
         public int numberOfBombs() {
             return grid.getNumberBombs();
         }
-
         public int getCounter() {
             return counter;
         }
-
         public boolean isaBomb(int x, int y){
             return grid.getCell(x,y).isaBomb();
         }
-
         public int getNumberOfCell(int x, int y){
             return grid.getCell(x,y).getNearBombs();
         }
-
         public Cell getCell(int x, int y) {
             return grid.getCell(x, y);
         }
+
+
+        public boolean isFlag(int row, int col) {
+            return grid.getCell(row,col).isFlag();
+        }
+
+        public boolean isAbomb(int row, int col) {
+            return grid.getCell(row,col).isaBomb();
+        }
+
+        public boolean isClicked(int row, int col) {
+            return grid.getCell(row,col).isClicked();
+        }
+
+        public int getNearBombs(int row, int col) {
+            return grid.getCell(row,col).getNearBombs();
+        }
+
+        public boolean getState(int row, int col) {
+            return grid.getCell(row,col).getState();
+        }
+
 
         public void revealEmptyCells(int startRow, int startCol) {
             int size = Grid.size;

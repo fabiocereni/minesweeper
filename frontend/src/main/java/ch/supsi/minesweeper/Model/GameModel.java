@@ -1,12 +1,12 @@
 package ch.supsi.minesweeper.Model;
 
+import ch.supsi.minesweeper.controller.CellHandler;
 import ch.supsi.minesweeper.controller.GameEventHandler;
 import ch.supsi.minesweeper.controller.PlayerEventHandler;
 import ch.supsi.mineweeper.backend.application.GameApp;
-import ch.supsi.mineweeper.backend.business.Cell;
 import ch.supsi.minesweeper.view.ConfirmExitPopupFxml;
 
-public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler {
+public class GameModel extends AbstractModel implements PlayerEventHandler, GameEventHandler, CellHandler{
 
     private static GameModel myself;
     private final GameApp gameApp;
@@ -21,7 +21,6 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
         }
         return myself;
     }
-
     @Override
     public void newGame() {
         gameApp.newGame();
@@ -36,48 +35,16 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
     public void quit() {
         ConfirmExitPopupFxml.showConfirmExit();
     }
-
-    @Override
-    public void move() {
-        gameApp.move();
-    }
-
-    @Override
-    public void openCell(int row, int col) {
-        gameApp.openCell(row,col);
-    }
-
-    @Override
-    public void toggleFlag(int row, int col) {
-        gameApp.toggleFlag(row,col);
-    }
-
-    @Override
-    public void selectCell(int row, int col) {
-        gameApp.selectCell(row,col);
-    }
-
-
-
-
     @Override
     public void clickRight(int row, int col) {
-        toggleFlag(row,col);
+        gameApp.toggleFlag(row,col);
     }
-
     @Override
     public void clickLeft(int row, int col) {
-        selectCell(row, col);
+        gameApp.selectCell(row, col);
     }
-
     public boolean isGameWon(){return gameApp.isGameWon();};
     public boolean isGameLost(){return gameApp.isGameLost();};
-
-
-
-    public Cell getCell(int x, int y){
-        return gameApp.getCell(x,y);
-    }
     public int numberOfFlagRemaining(){
         return gameApp.numberOfFlagRemaining();
     }
@@ -85,21 +52,37 @@ public class GameModel extends AbstractModel implements PlayerEventHandler, Game
         return gameApp.numberOfBombs();
     }
 
+
     @Override
-    public void revealEmptyCells(int startRow, int startCol){
-        gameApp.revealEmptyCells(startRow,startCol);
+    public boolean isFlag(int row, int col) {
+        return gameApp.isFlag(row, col);
     }
 
+    @Override
+    public boolean isAbomb(int row, int col) {
+        return gameApp.isAbomb(row, col);
+    }
+
+    @Override
+    public boolean isClicked(int row, int col) {
+        return gameApp.isClicked(row, col);
+    }
+
+    @Override
+    public int getNearBombs(int row, int col) {
+        return gameApp.getNearBombs(row, col);
+    }
+
+    @Override
+    public boolean getState(int row, int col) {
+        return gameApp.getState(row, col);
+    }
 
     // BISOGNA TROVARE UN MODO PER RIMUOVERLO
     @Override
-    public void about() {
-    }
-
+    public void about() {}
     @Override
-    public void help() {
-
-    }
+    public void help() {}
 
 
 }

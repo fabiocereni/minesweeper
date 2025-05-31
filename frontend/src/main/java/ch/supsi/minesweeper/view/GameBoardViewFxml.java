@@ -6,7 +6,6 @@ import ch.supsi.minesweeper.controller.PlayerEventHandler;
 import ch.supsi.minesweeper.Model.GameModel;
 import ch.supsi.minesweeper.controller.ControlledFxView;
 import ch.supsi.minesweeper.controller.GameController;
-import ch.supsi.mineweeper.backend.business.Cell;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -122,24 +120,23 @@ public class GameBoardViewFxml implements ControlledFxView {
     public void update(String sentence) {
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
-                Cell cell = gameModel.getCell(x, y);
                 Button btn = buttonMatrix[x][y];
 
 
-                if(cell.getState()){
+                if(gameModel.getState(x,y)){
                     btn.setDisable(false);
                 }
 
-                if (cell.isFlag()) {
+                if (gameModel.isFlag(x,y)) {
                     btn.setText("\uD83D\uDEA9");
                     btn.setStyle("-fx-background-color: yellow;");
-                } else if (cell.isClicked()) {
-                    if (cell.isaBomb()) {
+                } else if (gameModel.isClicked(x,y)) {
+                    if (gameModel.isAbomb(x,y)) {
                         btn.setText("\uD83D\uDCA3");
                         btn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
                         createDelayedDisabling();
                     } else {
-                        int near = cell.getNearBombs();
+                        int near = gameModel.getNearBombs(x,y);
                         btn.setText(near > 0 ? String.valueOf(near) : "");
                         btn.setStyle("-fx-background-color: green; -fx-text-fill: white;");
                     }
