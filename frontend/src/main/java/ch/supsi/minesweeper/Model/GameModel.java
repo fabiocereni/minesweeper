@@ -67,6 +67,7 @@ public class GameModel extends AbstractModel{
     }
 
     public boolean isGamePlaying(){return gameApp.isGamePlaying();}
+    public boolean isPathAcquired(){return gameApp.isPathAcquired();}
 
 
 }

@@ -183,10 +183,12 @@
 
         public void open(Path path) {
             grid = openLogic.open(path);
+            saveLogic.setFileName(path.toString());
             playng=true;
         }
-
         public boolean isGamePlaying() {
             return playng;
         }
+
+        public boolean isPathAcquired(){return saveLogic.isPathAcquired();}
     }

@@ -128,11 +128,15 @@ public class MenuBarViewFxml implements ControlledFxView {
         // get your data from the model, if needed
         // then update this view here
         if(gameModel.isGamePlaying()){
-            saveMenuItem.setDisable(false);
             saveAsMenuItem.setDisable(false);
         }else{
             saveMenuItem.setDisable(true);
             saveAsMenuItem.setDisable(true);
+        }
+        if(gameModel.isPathAcquired()){
+            saveMenuItem.setDisable(false);
+        }else{
+            saveMenuItem.setDisable(true);
         }
         System.out.println(this.getClass().getSimpleName() + " updated..." + System.currentTimeMillis());
     }

@@ -15,6 +15,8 @@ public class SaveLogic implements ISaveLogic {
     private final Grid grid;
     private String fileName;
 
+    private boolean pathAcquired;
+
     private SaveLogic() {
         grid = Grid.getInstance();
     }
@@ -29,7 +31,8 @@ public class SaveLogic implements ISaveLogic {
     @Override
     public void save() {
         try {
-            if (fileName == null || fileName.isEmpty()) {
+            //adesso questo if si potrebbe togliere dato che save lo posso cliccare quando ho già un path impostato
+            if (fileName == null) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
                 fileName = LocalDateTime.now().format(formatter) + ".json";
             }
@@ -37,7 +40,7 @@ public class SaveLogic implements ISaveLogic {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(file, Grid.getInstance());
 
-            this.fileName = file.getName();
+            //this.fileName = file.getName();
             System.out.println("Saved file " + fileName);
 
         } catch (IOException e) {
@@ -51,11 +54,17 @@ public class SaveLogic implements ISaveLogic {
             ObjectMapper mapper = new ObjectMapper();
             mapper.writerWithDefaultPrettyPrinter().writeValue(path.toFile(), Grid.getInstance());
             this.fileName = path.toString();
+            this.pathAcquired=true;
             System.out.println("Saved file as " + fileName);
         } catch (IOException e) {
             System.err.println("Error, save failed " + e.getMessage());
         }
     }
-
+    @Override
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+    @Override
+    public boolean isPathAcquired(){return this.pathAcquired;}
 
 }

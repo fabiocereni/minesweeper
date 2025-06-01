@@ -65,5 +65,6 @@ public class GameApp {
     }
 
     public boolean isGamePlaying(){return gameLogic.isGamePlaying();}
+    public boolean isPathAcquired(){return gameLogic.isPathAcquired();}
 
 }
