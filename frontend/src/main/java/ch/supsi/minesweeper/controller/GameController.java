@@ -63,6 +63,22 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     }
 
     @Override
+    public void open(Stage stage) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("scegli file");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("File JSON", "*.json")
+        );
+        fileChooser.setInitialFileName("game.json");
+
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            gameModel.open(file.toPath());
+            this.views.forEach(dataView -> dataView.update("Open file " + file.getName()));
+        }
+    }
+
+    @Override
     public void quit() {
         gameModel.quit();
     }

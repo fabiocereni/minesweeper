@@ -62,5 +62,9 @@ public class GameModel extends AbstractModel{
         gameApp.save();
     }
 
+    public void open(Path path) {
+        gameApp.open(path);
+    }
+
 
 }

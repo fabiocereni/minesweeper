@@ -1,6 +1,8 @@
     package ch.supsi.mineweeper.backend.business;
 
+    import ch.supsi.mineweeper.backend.business.save.IOpenLogic;
     import ch.supsi.mineweeper.backend.business.save.ISaveLogic;
+    import ch.supsi.mineweeper.backend.business.save.OpenLogic;
     import ch.supsi.mineweeper.backend.business.save.SaveLogic;
     import ch.supsi.mineweeper.backend.data.GameSettingsData;
 
@@ -17,6 +19,7 @@
         private Grid grid;
 
         private static final ISaveLogic saveLogic = SaveLogic.getInstance();
+        private static final IOpenLogic openLogic = OpenLogic.getInstance();
         private String fileName;
 
         private GameLogic() {
@@ -166,5 +169,9 @@
 
         public void saveAs(Path path) {
             saveLogic.saveAs(path);
+        }
+
+        public void open(Path path) {
+            grid = openLogic.open(path);
         }
     }

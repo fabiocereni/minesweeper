@@ -60,4 +60,8 @@ public class GameApp {
         gameLogic.saveAs(path);
     }
 
+    public void open(Path path) {
+        gameLogic.open(path);
+    }
+
 }

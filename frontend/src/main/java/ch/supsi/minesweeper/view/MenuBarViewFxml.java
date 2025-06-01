@@ -101,10 +101,14 @@ public class MenuBarViewFxml implements ControlledFxView {
             this.gameEventHandler.saveAs(stage);
         });
 
-
         /* CERCARE UN MODO PER ATTIVARE I DUE SAVE SOLO UNA VOLTA AVVIATA LA PARTITA */
         saveMenuItem.setDisable(false);
         saveAsMenuItem.setDisable(false);
+
+        this.openMenuItem.setOnAction(event -> {
+            Stage stage = (Stage) menuBar.getScene().getWindow();
+            this.gameEventHandler.open(stage);
+        });
 
         this.preferencesMenuItem.setOnAction(event -> {
             SettingsView settingsView = new SettingsView();

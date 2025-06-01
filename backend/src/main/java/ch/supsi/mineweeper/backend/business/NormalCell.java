@@ -1,7 +1,12 @@
 package ch.supsi.mineweeper.backend.business;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public non-sealed class NormalCell extends Cell {
+
+    @JsonProperty("nearBombs")
     private int nearBombs;
+
     public NormalCell() {
         super();
         this.nearBombs = 0;

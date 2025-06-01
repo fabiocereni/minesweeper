@@ -11,15 +11,15 @@ public class Grid {
 
     private static Grid myself;
 
-    @JsonProperty
+    @JsonProperty("size")
     public static final int size = 9;
     public static final int maxNumBomb = size*size-1;
     public static final int minNumBomb = 1;
-    @JsonProperty
+    @JsonProperty("numFlags")
     private int numFlags = 0;
-    @JsonProperty
+    @JsonProperty("numberbombs")
     private int numberBombs = 0;
-    @JsonProperty
+    @JsonProperty("grid")
     private Cell[][] grid;
 
     private Grid() {}
@@ -29,6 +29,14 @@ public class Grid {
             myself = new Grid();
         }
         return myself;
+    }
+
+    public static void setInstance(Grid newInstance) {
+        if (newInstance != null) {
+            myself = newInstance;
+        } else {
+           System.err.println("Grid non può essere null");
+        }
     }
 
     public Grid(int bombs) {
@@ -122,5 +130,17 @@ public class Grid {
             }
         }
         return numOfCellOpen;
+    }
+
+    public static Grid getMyself() {
+        return myself;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
     }
 }
