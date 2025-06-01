@@ -1,6 +1,6 @@
 package ch.supsi.minesweeper.controller.l10n;
 
-import ch.supsi.mineweeper.backend.application.i18n.TranslationsApp;
+import ch.supsi.minesweeper.backend.application.i18n.TranslationsApp;
 
 import java.util.List;
 

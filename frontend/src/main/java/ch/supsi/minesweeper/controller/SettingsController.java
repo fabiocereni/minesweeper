@@ -1,6 +1,6 @@
 package ch.supsi.minesweeper.controller;
 
-import ch.supsi.mineweeper.backend.data.GameSettingsData;
+import ch.supsi.minesweeper.backend.data.GameSettingsData;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;

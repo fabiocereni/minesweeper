@@ -1,8 +1,8 @@
 package ch.supsi.minesweeper.view;
 
-import ch.supsi.mineweeper.backend.business.Grid;
+import ch.supsi.minesweeper.backend.business.Grid;
 import ch.supsi.minesweeper.controller.l10n.TranslationsController;
-import ch.supsi.mineweeper.backend.data.GameSettingsData;
+import ch.supsi.minesweeper.backend.data.GameSettingsData;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;

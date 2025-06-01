@@ -72,6 +72,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         fileChooser.setInitialFileName("game.json");
 
         File file = fileChooser.showOpenDialog(stage);
+        System.out.println("sono qui");
         if (file != null) {
             gameModel.open(file.toPath());
             this.views.forEach(dataView -> dataView.update("Open file " + file.getName()));

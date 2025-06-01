@@ -1,6 +1,6 @@
 package ch.supsi.minesweeper.Model;
 
-import ch.supsi.mineweeper.backend.application.GameApp;
+import ch.supsi.minesweeper.backend.application.GameApp;
 import ch.supsi.minesweeper.view.ConfirmExitPopupFxml;
 
 import java.nio.file.Path;
