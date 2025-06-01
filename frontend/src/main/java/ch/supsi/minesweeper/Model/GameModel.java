@@ -66,5 +66,7 @@ public class GameModel extends AbstractModel{
         gameApp.open(path);
     }
 
+    public boolean isGamePlaying(){return gameApp.isGamePlaying();}
+
 
 }

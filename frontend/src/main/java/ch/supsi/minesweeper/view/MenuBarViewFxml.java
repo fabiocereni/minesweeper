@@ -101,9 +101,9 @@ public class MenuBarViewFxml implements ControlledFxView {
             this.gameEventHandler.saveAs(stage);
         });
 
-//        /* CERCARE UN MODO PER ATTIVARE I DUE SAVE SOLO UNA VOLTA AVVIATA LA PARTITA */
-//        saveMenuItem.setDisable(false);
-//        saveAsMenuItem.setDisable(false);
+        /* CERCARE UN MODO PER ATTIVARE I DUE SAVE SOLO UNA VOLTA AVVIATA LA PARTITA */
+        saveMenuItem.setDisable(true);
+        saveAsMenuItem.setDisable(true);
 
         this.openMenuItem.setOnAction(event -> {
             Stage stage = (Stage) menuBar.getScene().getWindow();
@@ -127,6 +127,13 @@ public class MenuBarViewFxml implements ControlledFxView {
     public void update(String sentence) {
         // get your data from the model, if needed
         // then update this view here
+        if(gameModel.isGamePlaying()){
+            saveMenuItem.setDisable(false);
+            saveAsMenuItem.setDisable(false);
+        }else{
+            saveMenuItem.setDisable(true);
+            saveAsMenuItem.setDisable(true);
+        }
         System.out.println(this.getClass().getSimpleName() + " updated..." + System.currentTimeMillis());
     }
 

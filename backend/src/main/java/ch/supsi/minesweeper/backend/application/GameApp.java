@@ -64,4 +64,6 @@ public class GameApp {
         gameLogic.open(path);
     }
 
+    public boolean isGamePlaying(){return gameLogic.isGamePlaying();}
+
 }

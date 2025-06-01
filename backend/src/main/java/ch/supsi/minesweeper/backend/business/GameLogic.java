@@ -18,11 +18,14 @@
 
         private Grid grid;
 
+        private boolean playng;
+
         private static final ISaveLogic saveLogic = SaveLogic.getInstance();
         private static final IOpenLogic openLogic = OpenLogic.getInstance();
 
         private GameLogic() {
             counter = 0;
+            playng =false;
             int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             Grid.setInstance(grid);
@@ -42,6 +45,7 @@
             grid = new Grid(bombs);
             Grid.setInstance(grid);
             grid.activateButtons();
+            playng =true;
         }
 
         public void toggleFlag(int row, int col) {
@@ -75,6 +79,7 @@
                 System.out.println("vittoria");
                 grid.showAll();
                 grid.disableButtons();
+                playng =false;
                 return true;
             }else{
                 return false;
@@ -87,6 +92,7 @@
                     if(grid.getCell(x,y).isClicked()&&grid.getCell(x,y).isaBomb()){
                         grid.showAll();
                         grid.disableButtons();
+                        playng =false;
                         return true;
                     }
                 }
@@ -177,6 +183,10 @@
 
         public void open(Path path) {
             grid = openLogic.open(path);
+            playng=true;
         }
 
+        public boolean isGamePlaying() {
+            return playng;
+        }
     }
