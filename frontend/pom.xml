@@ -14,52 +14,50 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- modulo backend -->
         <dependency>
             <groupId>ch.supsi.minesweeper</groupId>
             <artifactId>backend</artifactId>
             <version>1.1.0</version>
             <scope>compile</scope>
         </dependency>
+        <!-- javafx-controls -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
+            <version>17.0.14</version>
+        </dependency>
+        <!-- javafx-fxml -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.14</version>
+        </dependency>
+        <!-- javafx-graphics win -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
             <version>17.0.14</version>
             <classifier>win</classifier>
             <scope>compile</scope>
         </dependency>
+        <!-- javafx-graphics linux -->
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
+            <artifactId>javafx-graphics</artifactId>
             <version>17.0.14</version>
             <classifier>linux</classifier>
             <scope>compile</scope>
         </dependency>
+        <!-- javafx-graphics mac-aarch64 -->
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
+            <artifactId>javafx-graphics</artifactId>
             <version>17.0.14</version>
             <classifier>mac-aarch64</classifier>
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.14</version>
-            <classifier>win</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.14</version>
-            <classifier>linux</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>17.0.14</version>
-            <classifier>mac-aarch64</classifier>
-        </dependency>
     </dependencies>
     <build>
         <finalName>minesweeper</finalName>
