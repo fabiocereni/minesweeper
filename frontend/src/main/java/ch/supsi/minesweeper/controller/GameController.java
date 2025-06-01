@@ -70,7 +70,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void clickRight(int row, int col) {
         gameModel.clickRight(row, col);
-        views.forEach(dataView -> dataView.update(""));
+        views.forEach(dataView -> dataView.update(translationsController.translate("label.infoBombs") + ": " + gameModel.numberOfBombs() + " - " +  translationsController.translate("label.infoFlags") + " : " + gameModel.numberOfFlagRemaining()));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         }else if(gameModel.isGameWon()){
             views.forEach(dataView -> dataView.update(translationsController.translate("label.win")));
         }else{
-            views.forEach(dataView -> dataView.update(""));
+            views.forEach(dataView -> dataView.update(translationsController.translate("label.infoBombs") + ": " + gameModel.numberOfBombs() + " - " +  translationsController.translate("label.infoFlags") + " : " + gameModel.numberOfFlagRemaining()));
         }
     }
 
