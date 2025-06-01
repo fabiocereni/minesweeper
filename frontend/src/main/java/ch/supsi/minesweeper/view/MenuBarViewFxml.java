@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class MenuBarViewFxml implements ControlledFxView {
     private MenuBarViewFxml() {
         translationsController = TranslationsController.getInstance();
     }
+
     public static MenuBarViewFxml getInstance() {
         if (myself == null) {
             myself = new MenuBarViewFxml();
@@ -67,6 +69,7 @@ public class MenuBarViewFxml implements ControlledFxView {
         }
         return myself;
     }
+
     @Override
     public void initialize(EventHandler eventHandler, AbstractModel model) {
         this.createBehaviour();
@@ -74,6 +77,7 @@ public class MenuBarViewFxml implements ControlledFxView {
         this.gameEventHandler = (GameEventHandler) eventHandler;
         this.gameModel = (GameModel) model;
     }
+
     private void changeLanguage() {
         this.fileMenu.setText(translationsController.translate("label.file"));
         this.newMenuItem.setText(translationsController.translate("label.new"));
@@ -87,10 +91,21 @@ public class MenuBarViewFxml implements ControlledFxView {
         this.aboutMenuItem.setText(translationsController.translate("label.about"));
         this.helpMenuItem.setText(translationsController.translate("label.help"));
     }
+
     private void createBehaviour() {
         this.newMenuItem.setOnAction(event -> this.gameEventHandler.newGame());
-        this.saveMenuItem.setOnAction(event -> this.gameEventHandler.save());
         this.quitMenuItem.setOnAction(event -> this.gameEventHandler.quit());
+        this.saveMenuItem.setOnAction(event -> this.gameEventHandler.save());
+        this.saveAsMenuItem.setOnAction(event -> {
+            Stage stage = (Stage) menuBar.getScene().getWindow();
+            this.gameEventHandler.saveAs(stage);
+        });
+
+
+        /* CERCARE UN MODO PER ATTIVARE I DUE SAVE SOLO UNA VOLTA AVVIATA LA PARTITA */
+        saveMenuItem.setDisable(false);
+        saveAsMenuItem.setDisable(false);
+
         this.preferencesMenuItem.setOnAction(event -> {
             SettingsView settingsView = new SettingsView();
             settingsView.show();
@@ -98,10 +113,12 @@ public class MenuBarViewFxml implements ControlledFxView {
         this.aboutMenuItem.setOnAction(event -> this.gameEventHandler.about());
         this.helpMenuItem.setOnAction(event -> this.gameEventHandler.help());
     }
+
     @Override
     public Node getNode() {
         return this.menuBar;
     }
+
     @Override
     public void update(String sentence) {
         // get your data from the model, if needed

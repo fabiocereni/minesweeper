@@ -1,33 +1,45 @@
     package ch.supsi.mineweeper.backend.business;
 
+    import ch.supsi.mineweeper.backend.business.save.ISaveLogic;
+    import ch.supsi.mineweeper.backend.business.save.SaveLogic;
     import ch.supsi.mineweeper.backend.data.GameSettingsData;
+
+    import java.nio.file.Path;
     import java.util.LinkedList;
     import java.util.Queue;
 
     public class GameLogic {
+
         private static GameLogic myself;
+
         private int counter;
+
         private Grid grid;
+
+        private static final ISaveLogic saveLogic = SaveLogic.getInstance();
+        private String fileName;
+
         private GameLogic() {
             counter = 0;
             int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             grid.disableButtons();
         }
+
         public static GameLogic getInstance() {
             if (myself == null) {
                 myself = new GameLogic();
             }
             return myself;
         }
+
         public void newGame() {
             counter = 0;
             int bombs = GameSettingsData.getInstance().getNumBombs();
             grid = new Grid(bombs);
             grid.activateButtons();
         }
-        public void save() {
-        }
+
         public void toggleFlag(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if (!cell.isClicked()) {
@@ -43,6 +55,7 @@
                 }
             }
         }
+
         public void selectCell(int row, int col) {
             Cell cell = grid.getCell(row, col);
             if(!cell.isFlag()) {
@@ -52,6 +65,7 @@
                 }
             }
         }
+
         public boolean isGameWon(){
             if (grid.getNumberOfOpenCell() == ((Grid.size * Grid.size) - grid.getNumberBombs())) {
                 System.out.println("vittoria");
@@ -61,7 +75,8 @@
             }else{
                 return false;
             }
-        };
+        }
+
         public boolean isGameLost(){
             for(int y = 0; y < Grid.size;y++) {
                 for (int x = 0; x < Grid.size;x++) {
@@ -75,6 +90,7 @@
             }
             return false;
         }
+
         public void revealEmptyCells(int startRow, int startCol) {
             int size = Grid.size;
             boolean[][] visited = new boolean[size][size];
@@ -106,6 +122,7 @@
                 }
             }
         }
+
         public int numberOfFlagRemaining(){
             return grid.getNumberBombs()-grid.getNumFlags();
         }
@@ -141,5 +158,13 @@
         }
         public int numberOfFlaggedCells() {
             return grid.getNumFlags();
+        }
+
+        public void save() {
+            this.fileName = saveLogic.save("game1");
+        }
+
+        public void saveAs(Path path) {
+            saveLogic.saveAs(path);
         }
     }

@@ -2,6 +2,8 @@ package ch.supsi.mineweeper.backend.application;
 
 import ch.supsi.mineweeper.backend.business.GameLogic;
 
+import java.nio.file.Path;
+
 public class GameApp {
     private static GameApp myself;
     private GameLogic gameLogic;
@@ -48,6 +50,14 @@ public class GameApp {
     }
     public boolean getState(int row, int col) {
         return gameLogic.getState(row, col);
+    }
+
+    public void save(String nomeFile) {
+        gameLogic.save();
+    }
+
+    public void saveAs(Path path) {
+        gameLogic.saveAs(path);
     }
 
 }

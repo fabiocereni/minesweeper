@@ -1,8 +1,14 @@
 package ch.supsi.mineweeper.backend.business;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public sealed abstract class Cell permits NormalCell, BombCell{
+
+    @JsonProperty
     private boolean clicked;
+    @JsonProperty
     private boolean isFlag;
+    @JsonProperty
     private boolean state;
     public Cell() {
         this.clicked = false;

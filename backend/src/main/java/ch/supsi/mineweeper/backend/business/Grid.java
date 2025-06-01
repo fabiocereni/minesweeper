@@ -1,16 +1,35 @@
 package ch.supsi.mineweeper.backend.business;
 
+import ch.supsi.mineweeper.backend.application.save.SaveApp;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Grid {
+
+    private static Grid myself;
+
+    @JsonProperty
     public static final int size = 9;
     public static final int maxNumBomb = size*size-1;
     public static final int minNumBomb = 1;
+    @JsonProperty
     private int numFlags = 0;
+    @JsonProperty
     private int numberBombs = 0;
+    @JsonProperty
     private Cell[][] grid;
+
+    private Grid() {}
+
+    public static Grid getInstance() {
+        if (myself == null) {
+            myself = new Grid();
+        }
+        return myself;
+    }
 
     public Grid(int bombs) {
         this.numberBombs = bombs;
@@ -31,6 +50,7 @@ public class Grid {
         }
         setNumbers();
     }
+
     private void setNumbers(){
         for(int y = 0; y<size;y++){
             for (int x = 0; x < size; x++) {
