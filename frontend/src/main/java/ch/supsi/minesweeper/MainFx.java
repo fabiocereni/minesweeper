@@ -21,14 +21,15 @@ import ch.supsi.minesweeper.view.*;
 import java.util.List;
 
 public class MainFx extends Application {
+
     public static final String APP_TITLE = "mine sweeper";
+
     private final AbstractModel gameModel;
     private final ControlledFxView menuBarView;
     private final ControlledFxView gameBoardView;
     private final UncontrolledFxView userFeedbackView;
     private final GameEventHandler gameEventHandler;
     private final PlayerEventHandler playerEventHandler;
-    private final TranslationsController translationsController;
 
     public MainFx() {
         // GAME MODEL
@@ -43,9 +44,6 @@ public class MainFx extends Application {
         this.gameEventHandler = GameController.getInstance();
         this.playerEventHandler = GameController.getInstance();
 
-        // TRANSLATIONS
-        this.translationsController = TranslationsController.getInstance();
-
         // SCAFFOLDING of M-V-C
         this.menuBarView.initialize(this.gameEventHandler, this.gameModel);
         this.gameBoardView.initialize(this.playerEventHandler, this.gameModel);
@@ -55,36 +53,37 @@ public class MainFx extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        VBox homeScreen = new VBox(20);
-        homeScreen.setAlignment(Pos.CENTER);
+        // handle the main window close request
+        // in real life, this event should not be dealt with here!
+        // it should actually be delegated to a suitable ExitController!
+        primaryStage.setOnCloseRequest(
+                windowEvent -> {
+                    // consume the window event (the main window would be closed otherwise no matter what)
+                    windowEvent.consume();
 
-        Button newGameButton = new Button(translationsController.translate("label.newGame"));
-        Button quitButton = new Button(translationsController.translate("label.quit"));
+                    // quit the app
+                    // replace this hard close
+                    // by delegating the work to a suitable controller
+                    primaryStage.close();
+                }
+        );
 
-        newGameButton.setPrefWidth(200);
-        newGameButton.setPrefHeight(30);
-
-        quitButton.setPrefWidth(200);
-        quitButton.setPrefHeight(30);
-
-        homeScreen.getChildren().addAll(newGameButton, quitButton);
-        Scene homeScene = new Scene(new StackPane(homeScreen), 400, 300);
-
+        // SCAFFOLDING OF MAIN PANE
         BorderPane mainBorderPane = new BorderPane();
         mainBorderPane.setTop(this.menuBarView.getNode());
         mainBorderPane.setCenter(this.gameBoardView.getNode());
         mainBorderPane.setBottom(this.userFeedbackView.getNode());
-        Scene gameScene = new Scene(mainBorderPane);
 
-        newGameButton.setOnAction(e -> primaryStage.setScene(gameScene));
-        quitButton.setOnAction(e -> primaryStage.close());
+        // SCENE
+        Scene scene = new Scene(mainBorderPane);
 
-        primaryStage.setTitle(APP_TITLE);
+        // PRIMARY STAGE
+        primaryStage.setTitle(MainFx.APP_TITLE);
         primaryStage.setResizable(false);
-        primaryStage.setScene(homeScene);
+        primaryStage.setScene(scene);
+        primaryStage.toFront();
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
