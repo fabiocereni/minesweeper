@@ -22,14 +22,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GameBoardViewFxml implements ControlledFxView {
+
     private static GameBoardViewFxml myself;
+
     private PlayerEventHandler playerEventHandler;
+
     private GameModel gameModel;
+
     private GameController gameController;
+
     private Button[][] buttonMatrix = new Button[9][9];
+
     @FXML
     private GridPane containerPane;
+
     private GameBoardViewFxml() {}
+
     public static GameBoardViewFxml getInstance() {
         if (myself == null) {
             myself = new GameBoardViewFxml();
@@ -46,6 +54,7 @@ public class GameBoardViewFxml implements ControlledFxView {
         }
         return myself;
     }
+
     @Override
     public void initialize(EventHandler eventHandler, AbstractModel model) {
         this.playerEventHandler = (PlayerEventHandler) eventHandler;
@@ -54,10 +63,12 @@ public class GameBoardViewFxml implements ControlledFxView {
         this.createBehaviour();
         this.disableButtons();
     }
+
     @Override
     public Node getNode() {
         return this.containerPane;
     }
+
     @Override
     public void update(String sentence) {
         for (int y = 0; y < 9; y++) {
@@ -90,6 +101,7 @@ public class GameBoardViewFxml implements ControlledFxView {
         Date date = new Date(System.currentTimeMillis());
         System.out.println(this.getClass().getSimpleName() + " updated..." + dateFormat.format(date));
     }
+
     private void createButton() {
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
@@ -108,6 +120,7 @@ public class GameBoardViewFxml implements ControlledFxView {
             }
         }
     }
+
     private void createBehaviour() {
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
@@ -119,6 +132,7 @@ public class GameBoardViewFxml implements ControlledFxView {
             }
         }
     }
+
     private void click(int row, int col, MouseButton button) {
         if (button == MouseButton.SECONDARY) {
             playerEventHandler.clickRight(row,col);
@@ -126,23 +140,19 @@ public class GameBoardViewFxml implements ControlledFxView {
             playerEventHandler.clickLeft(row, col);
         }
     }
+
     private void createDelayedDisabling() {
         PauseTransition pause = new PauseTransition(javafx.util.Duration.seconds(1));
         pause.setOnFinished(event -> disableButtons());
         pause.play();
     }
-    public void disableButtons(){
+
+    public void disableButtons() {
         for (int y=0; y<9; y++){
             for (int x=0; x<9 ; x++){
                 buttonMatrix[y][x].setDisable(true);
             }
         }
     }
-    public void activateButtons(){
-        for (int y=0; y<9; y++){
-            for (int x=0; x<9 ; x++){
-                buttonMatrix[y][x].setDisable(false);
-            }
-        }
-    }
+
 }

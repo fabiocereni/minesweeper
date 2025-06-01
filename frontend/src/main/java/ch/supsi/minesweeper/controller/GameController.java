@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.List;
 
 public class GameController implements GameEventHandler, PlayerEventHandler {
+
     private static GameController myself;
     private GameModel gameModel;
     private List<DataView> views;
@@ -41,11 +42,9 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
     @Override
     public void save() {
         gameModel.save();
-        this.views.forEach(dataView -> dataView.update("Saved"));
+        this.views.forEach(dataView -> dataView.update(translationsController.translate("label.saved")));
     }
 
-
-    // TROVARE UNA SOLUZIONE MIGLIORE
     @Override
     public void saveAs(Stage stage) {
         FileChooser fileChooser = new FileChooser();
@@ -58,24 +57,23 @@ public class GameController implements GameEventHandler, PlayerEventHandler {
         File file = fileChooser.showSaveDialog(stage);
         if (file != null) {
             gameModel.saveAs(file.toPath());
-            this.views.forEach(dataView -> dataView.update("Saved"));
+            this.views.forEach(dataView -> dataView.update(translationsController.translate("label.saved")));
         }
     }
 
     @Override
     public void open(Stage stage) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("scegli file");
+        fileChooser.setTitle(translationsController.translate("label.chooseFile"));
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("File JSON", "*.json")
         );
         fileChooser.setInitialFileName("game.json");
 
         File file = fileChooser.showOpenDialog(stage);
-        System.out.println("sono qui");
         if (file != null) {
             gameModel.open(file.toPath());
-            this.views.forEach(dataView -> dataView.update("Open file " + file.getName()));
+            this.views.forEach(dataView -> dataView.update(translationsController.translate("label.openFile") + file.getName()));
         }
     }
 

@@ -13,16 +13,23 @@ import java.io.IOException;
 import java.net.URL;
 
 public class UserFeedbackViewFxml implements UncontrolledFxView {
+
     private static UserFeedbackViewFxml myself;
+
     private GameModel gameModel;
+
     @FXML
     private ScrollPane containerPane;
+
     @FXML
     private Text userFeedbackBar;
+
     private final TranslationsController translationsController;
+
     private UserFeedbackViewFxml() {
         this.translationsController = TranslationsController.getInstance();
     }
+
     public static UserFeedbackViewFxml getInstance() {
         if (myself == null) {
             myself = new UserFeedbackViewFxml();
@@ -39,18 +46,22 @@ public class UserFeedbackViewFxml implements UncontrolledFxView {
         }
         return myself;
     }
+
     @Override
     public void initialize(AbstractModel model) {
         this.gameModel = (GameModel) model;
         changeLanguage();
     }
+
     private void changeLanguage() {
         this.userFeedbackBar.setText(this.translationsController.translate("label.userFeedback"));
     }
+
     @Override
     public Node getNode() {
         return this.containerPane;
     }
+
     @Override
     public void update(String sentence) {
         this.userFeedbackBar.setText(sentence);

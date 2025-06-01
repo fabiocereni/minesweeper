@@ -1,8 +1,8 @@
 package ch.supsi.minesweeper.view;
 
-import ch.supsi.minesweeper.backend.business.Grid;
+import ch.supsi.minesweeper.business.Grid;
 import ch.supsi.minesweeper.controller.l10n.TranslationsController;
-import ch.supsi.minesweeper.backend.data.GameSettingsData;
+import ch.supsi.minesweeper.data.GameSettingsData;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -46,6 +46,7 @@ public class SettingsView {
         this.stage.setScene(new Scene(layout));
         this.stage.setResizable(false);
     }
+
     private void saveSettings() {
         int bombs = bombsSpinner.getValue();
         String languageTag = languageComboBox.getValue();
@@ -57,6 +58,7 @@ public class SettingsView {
         alert.showAndWait();
         stage.close();
     }
+
     public void show() {
         stage.show();
     }
